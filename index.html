@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#4f46e5">
+    <title>Academic English Master</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left" onclick="app.finishExam()">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="logo-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <span class="navbar-title">Academic Master</span>
+            </div>
+            
+            <div id="navbar-progress" class="navbar-progress hidden">
+                <div class="progress-bar-bg">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="question-number">Question 1</span>
+                    <span id="score-display">Score: 0/0</span>
+                </div>
+            </div>
+
+            <button id="finish-btn" class="navbar-finish hidden" onclick="app.finishExam()">Finish</button>
+        </div>
+    </nav>
+
+    <!-- Error Banner -->
+    <div id="error-banner" class="error-banner hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="error-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span id="error-message"></span>
+        <button class="error-close" onclick="app.clearError()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- SETUP SCREEN -->
+        <div id="setup-screen" class="screen">
+            <div class="setup-card">
+                <div class="setup-header">
+                    <div class="setup-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h1 class="setup-title">Academic Master</h1>
+                    <p class="setup-subtitle">Precision evaluation for Vocabulary & Grammar.<br>Questions generated one at a time. Answer as many as you like!</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Evaluation Focus</label>
+                    <div class="button-grid" id="category-buttons">
+                        <button class="option-btn active" data-value="Mixed">Mixed</button>
+                        <button class="option-btn" data-value="Vocabulary">Vocabulary</button>
+                        <button class="option-btn" data-value="Grammar">Grammar</button>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Difficulty Level</label>
+                        <select id="difficulty-select" class="form-select">
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced" selected>Advanced</option>
+                            <option value="Proficiency (C2)">Proficiency (C2)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Academic Field</label>
+                        <select id="topic-select" class="form-select">
+                            <option value="General Science" selected>General Science</option>
+                            <option value="Economics">Economics</option>
+                            <option value="History">History</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Medicine">Medicine</option>
+                            <option value="Literature">Literature</option>
+                            <option value="Psychology">Psychology</option>
+                            <option value="Sociology">Sociology</option>
+                            <option value="Environmental Science">Environmental Science</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="start-btn" onclick="app.startExam()">Start Practice</button>
+            </div>
+        </div>
+
+        <!-- LOADING SCREEN -->
+        <div id="loading-screen" class="screen hidden">
+            <div class="loading-container">
+                <div class="spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring spinner-ring-active"></div>
+                </div>
+                <h2 class="loading-title">Generating Question</h2>
+                <p class="loading-subtitle">Mistral AI is preparing your question...</p>
+            </div>
+        </div>
+
+        <!-- EXAM SCREEN -->
+        <div id="exam-screen" class="screen hidden">
+            <div class="question-container">
+                <div class="question-header">
+                    <div class="question-tags">
+                        <span id="academic-context" class="tag tag-context"></span>
+                        <span id="category-tag" class="tag"></span>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <h2 id="question-sentence" class="question-sentence"></h2>
+
+                    <div id="options-container" class="options-grid"></div>
+
+                    <div id="feedback-section" class="feedback-section hidden">
+                        <div id="feedback-box" class="feedback-box">
+                            <div class="feedback-header">
+                                <div id="feedback-icon"></div>
+                                <h4 id="feedback-title"></h4>
+                            </div>
+                            <p class="feedback-analysis">
+                                <span class="feedback-label">Analysis:</span>
+                                <span id="feedback-explanation"></span>
+                            </p>
+                            
+                            <div class="feedback-actions">
+                                <button id="next-btn" class="next-btn" onclick="app.goToNextQuestion()">
+                                    <span id="next-btn-text">Next Question</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="next-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                </button>
+                                <button class="finish-practice-btn" onclick="app.finishExam()">
+                                    Finish & See Results
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS SCREEN -->
+        <div id="results-screen" class="screen hidden">
+            <div class="results-container">
+                <div class="results-card">
+                    <h2 class="results-title">Practice Complete</h2>
+                    <p id="score-message" class="score-message"></p>
+                    
+                    <div class="score-circle">
+                        <svg class="score-svg" viewBox="0 0 128 128">
+                            <circle class="score-track" cx="64" cy="64" r="58"/>
+                            <circle id="score-progress" class="score-progress" cx="64" cy="64" r="58"/>
+                        </svg>
+                        <div class="score-text">
+                            <span id="score-fraction" class="score-fraction"></span>
+                            <span id="score-percentage" class="score-percentage"></span>
+                        </div>
+                    </div>
+
+                    <p id="total-questions" class="total-questions"></p>
+
+                    <button class="restart-btn" onclick="app.restart()">New Practice Session</button>
+                </div>
+
+                <h3 class="review-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="review-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    Review Answers
+                </h3>
+
+                <div id="review-container" class="review-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="mistralService.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
