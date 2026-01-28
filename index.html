@@ -531,23 +531,25 @@ const CONFIG = {
 The correct answer MUST be: "${word}"
 
 Requirements:
-- Write a sentence (15-25 words) where "${word}" fits naturally in the blank _____
+- Write a sentence (25-40 words) with rich context where "${word}" is the ONLY natural fit in the blank _____
+- Include specific details (setting, subject matter, relationships between ideas) to make the correct choice unambiguous
+- The sentence should feel authentic to academic writing (research papers, essays, lectures, or formal discussions)
 - Provide exactly 5 word options including "${word}"
 - "${word}" must be the correct answer (index 0)
-- Other 4 options should be plausible but wrong
-- For EACH option, provide a brief explanation of why it is correct or wrong in this context
+- Other 4 options should be plausible distractors that would NOT fit naturally given the specific context
+- For EACH option, explain why it is correct or wrong based on the specific context clues in the sentence
 
 Respond with JSON only:
 {
-  "sentence": "Scientists _____ the data to identify patterns.",
-  "options": ["analyze", "memorize", "organize", "summarize", "visualize"],
+  "sentence": "In their latest study, the research team decided to _____ the raw survey data from over 500 participants, looking for hidden correlations between income levels and educational attainment that previous analyses might have overlooked.",
+  "options": ["analyze", "memorize", "celebrate", "ignore", "publish"],
   "correctIndex": 0,
   "explanations": [
-    "'Analyze' is correct because it means to examine in detail, which fits the scientific context of identifying patterns in data.",
-    "'Memorize' is wrong because it means to commit to memory, which doesn't fit the context of working with data to find patterns.",
-    "'Organize' is wrong because while related to data, it means to arrange systematically, not to examine for patterns.",
-    "'Summarize' is wrong because it means to give a brief overview, not to examine details for patterns.",
-    "'Visualize' is wrong because it means to form a mental image, which is a result of analysis, not the process itself."
+    "'Analyze' is correct because the context mentions examining raw data for hidden correlations, which requires detailed examination - the definition of analyze.",
+    "'Memorize' is wrong because you don't commit raw survey data to memory; the context is about processing data, not learning it by heart.",
+    "'Celebrate' is wrong because the sentence describes a research methodology, not a celebration of results.",
+    "'Ignore' is wrong because the researchers are actively looking for patterns, which is the opposite of ignoring the data.",
+    "'Publish' is wrong because publishing comes AFTER analysis; the sentence describes what they do WITH the data, not what they do AFTER processing it."
   ]
 }`;
     }
