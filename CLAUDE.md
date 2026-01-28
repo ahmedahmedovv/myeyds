@@ -114,4 +114,20 @@ const CONFIG = {
 - Uses Mistral AI API
 - Prefetches next question while user answers
 - Score resets when switching categories
-- Mobile responsive
+
+## Mobile Support
+
+Optimized for iPhone 13 mini (375x812) and other iOS devices:
+
+- Safe area handling for notch and home indicator
+- 48px minimum touch targets (Apple HIG compliant)
+- Horizontal scrolling category tabs with momentum
+- No double-tap zoom on buttons
+- Add to Home Screen capable
+
+Responsive breakpoints:
+| Screen | Optimizations |
+|--------|---------------|
+| < 375px | Extra compact (iPhone SE) |
+| 375px+ | iPhone 13 mini default |
+| 640px+ | Tablet/desktop layout |
