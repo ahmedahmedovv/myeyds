@@ -79,8 +79,21 @@ const mistralService = {
             ? (Math.random() > 0.5 ? 'Vocabulary' : 'Grammar')
             : (contentBlueprint.id === 'vocabulary' ? 'Vocabulary' : 'Grammar');
 
-        // Generate prompt using blueprints
+        // Generate prompt using blueprints with random seed for variety
+        const sessionSeed = Date.now() + Math.random();
+        const varietySeed = Math.floor(sessionSeed % 10000);
+        
         const basePrompt = generatePrompt(config.contentBlueprint, config.formatBlueprint, config);
+        
+        // Add variety instruction based on question index
+        const varietyHints = [
+            `Question #${index + 1} - Make this completely different from previous questions.`,
+            `Focus on an unusual aspect of ${config.topic}.`,
+            `Use a fresh scenario that hasn't been tested before.`,
+            `Challenge the user with an unexpected context.`,
+            `Create a question about a nuanced or subtle distinction.`
+        ];
+        const varietyHint = varietyHints[index % varietyHints.length];
         
         const outputFormat = `
 
@@ -100,7 +113,7 @@ ${formatBlueprint.id === 'word_formation' ? '- Use format: _____ (baseword)' : '
 ${formatBlueprint.id === 'collocation' ? '- Test word partnerships' : ''}
 ${formatBlueprint.id === 'register_shift' ? '- Use "Informal: ... Formal: ..." format' : ''}`;
 
-        const prompt = basePrompt + outputFormat;
+        const prompt = varietyHint + '\n\n' + basePrompt + outputFormat + '\n\nVARIETY SEED: ' + varietySeed;
 
         try {
             const response = await fetch(MISTRAL_API_URL, {
@@ -121,7 +134,7 @@ ${formatBlueprint.id === 'register_shift' ? '- Use "Informal: ... Formal: ..." f
                             content: prompt
                         }
                     ],
-                    temperature: 0.7,
+                    temperature: 0.85,  // Higher for more variety
                     max_tokens: 600,  // Reduced to force conciseness
                     response_format: { type: "json_object" }  // Request JSON mode if available
                 })

@@ -2,6 +2,103 @@
 // Blueprints define question generation templates with prompts, icons, and metadata
 
 // ============================================
+// VARIETY HELPERS (Prevent repetitive questions)
+// ============================================
+
+// Topic variations for each academic field to encourage variety
+const TopicVariations = {
+    'General Science': [
+        'laboratory research methodology', 'experimental design', 'data analysis',
+        'scientific collaboration', 'peer review processes', 'research ethics',
+        'hypothesis formulation', 'statistical significance', 'control variables'
+    ],
+    'Economics': [
+        'market analysis', 'fiscal policy', 'monetary systems', 'trade agreements',
+        'economic indicators', 'supply chain dynamics', 'consumer behavior',
+        'investment strategies', 'globalization effects'
+    ],
+    'History': [
+        'primary source analysis', 'historiographical debates', 'archival research',
+        'periodization concepts', 'causal relationships', 'historical methodology',
+        'document preservation', 'oral history', 'material culture'
+    ],
+    'Technology': [
+        'digital infrastructure', 'algorithmic processes', 'system architecture',
+        'cybersecurity protocols', 'data privacy', 'machine learning applications',
+        'technological convergence', 'innovation diffusion', 'digital transformation'
+    ],
+    'Medicine': [
+        'clinical trials', 'diagnostic procedures', 'therapeutic interventions',
+        'patient outcomes', 'epidemiological studies', 'pharmaceutical research',
+        'medical ethics', 'healthcare systems', 'preventive medicine'
+    ],
+    'Literature': [
+        'narrative structures', 'thematic analysis', 'literary criticism',
+        'intertextual references', 'genre conventions', 'character development',
+        'symbolic representation', 'rhetorical devices', 'canon formation'
+    ],
+    'Psychology': [
+        'cognitive processes', 'behavioral patterns', 'experimental psychology',
+        'developmental stages', 'neuropsychological research', 'social dynamics',
+        'therapeutic approaches', 'statistical methods', 'research validity'
+    ],
+    'Sociology': [
+        'social stratification', 'cultural norms', 'qualitative methods',
+        'quantitative analysis', 'institutional structures', 'group dynamics',
+        'social mobility', 'demographic trends', 'ethnographic research'
+    ],
+    'Environmental Science': [
+        'climate systems', 'biodiversity conservation', 'sustainability practices',
+        'ecological impacts', 'resource management', 'pollution control',
+        'renewable energy', 'ecosystem services', 'environmental policy'
+    ]
+};
+
+// Random academic vocabulary pools (rotate these in prompts)
+const VocabPools = {
+    formal: [
+        'substantiate', 'exacerbate', 'mitigate', 'proliferate', 'ubiquitous',
+        'inherent', 'comprehensive', 'empirical', 'theoretical', 'fundamental',
+        'underlying', 'implications', 'constraints', 'framework', 'paradigm',
+        'methodology', 'substantial', 'considerable', 'demonstrate', 'establish'
+    ],
+    grammar: [
+        'subject-verb agreement', 'tense consistency', 'article usage', 'preposition',
+        'nominalization', 'passive voice', 'relative clause', 'conditional',
+        'modal verb', 'parallel structure'
+    ],
+    collocations: [
+        'draw a conclusion', 'shed light on', 'conduct research', 'pose a challenge',
+        'establish criteria', 'provide evidence', 'address the issue', 'adopt approach',
+        'achieve objectives', 'maintain consistency'
+    ]
+};
+
+// Get random subset from array
+function getRandomSubset(arr, count) {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+}
+
+// Get random variation for topic
+function getTopicVariation(topic) {
+    const variations = TopicVariations[topic] || ['general concepts'];
+    return variations[Math.floor(Math.random() * variations.length)];
+}
+
+// Generate variety instruction for AI
+function getVarietyInstruction() {
+    const instructions = [
+        'Create a completely original question unlike typical academic examples.',
+        'Focus on an unusual or less common aspect of this topic.',
+        'Use an unexpected context or scenario within this field.',
+        'Test a nuanced distinction that advanced learners often miss.',
+        'Create a question about a recent development or modern application.'
+    ];
+    return instructions[Math.floor(Math.random() * instructions.length)];
+}
+
+// ============================================
 // CONTENT BLUEPRINTS (What to study)
 // ============================================
 const ContentBlueprints = [
@@ -12,22 +109,28 @@ const ContentBlueprints = [
         description: 'Both vocabulary and grammar combined',
         icon: '🎯',
         color: 'purple',
-        prompt: (config) => `
+        prompt: (config) => {
+            const specificFocus = getTopicVariation(config.topic);
+            const varietyInstruction = getVarietyInstruction();
+            const vocabExamples = getRandomSubset(VocabPools.formal, 5).join(', ');
+            
+            return `
 CONTENT FOCUS: MIXED (Vocabulary + Grammar)
-Randomly choose to test either advanced academic vocabulary OR sophisticated grammar structures.
+Specific context: ${specificFocus} within ${config.topic}.
 
-VOCABULARY ASPECTS:
-- High-register academic words (e.g., substantiate, exacerbate, mitigate, proliferate, ubiquitous, inherent, comprehensive, empirical)
-- Word choice in formal academic context
-- Precision of terminology for ${config.topic}
+${varietyInstruction}
 
-GRAMMAR ASPECTS:
-- Complex tense usage (perfect tenses, future in the past, conditionals)
-- Passive voice and nominalization
-- Prepositions and articles in academic contexts
-- Subordinate clauses and sophisticated connectors
-- Subject-verb agreement with complex subjects
-`
+RANDOMLY CHOOSE ONE:
+Option A - VOCABULARY: Test words like: ${vocabExamples}
+Option B - GRAMMAR: Test complex structures (perfect tenses, passive voice, prepositions, conditionals)
+
+REQUIREMENTS:
+- Make the question specifically about ${specificFocus}
+- Avoid the most common or clichéd examples
+- Context should be fresh and engaging
+- Target ${config.difficulty} level precisely
+`;
+        }
     },
     {
         id: 'vocabulary',
@@ -36,26 +139,31 @@ GRAMMAR ASPECTS:
         description: 'Academic vocabulary and terminology',
         icon: '📚',
         color: 'amber',
-        prompt: (config) => `
+        prompt: (config) => {
+            const specificFocus = getTopicVariation(config.topic);
+            const varietyInstruction = getVarietyInstruction();
+            const vocabSample = getRandomSubset(VocabPools.formal, 8).join(', ');
+            
+            return `
 CONTENT FOCUS: ACADEMIC VOCABULARY ONLY
-Test sophisticated, high-register vocabulary specific to ${config.topic} and general academic English.
+Specific domain: ${specificFocus} within ${config.topic}.
+
+${varietyInstruction}
+
+WORD POOL (choose from or use similar): ${vocabSample}
+
+ADDITIONAL OPTIONS:
+- Discipline-specific terminology for ${config.topic}
+- High-frequency academic collocations
+- Words with subtle register differences
 
 REQUIREMENTS:
-- Use C1-C2 level academic vocabulary (AWL - Academic Word List)
-- Focus on words like: substantiate, exacerbate, mitigate, proliferate, ubiquitous, inherent, comprehensive, empirical, theoretical, fundamental, underlying, implications, constraints, framework, paradigm, methodology
-- Test precision of word choice in formal context
-- Include discipline-specific terminology for ${config.topic}
-
-AVOID:
-- Simple everyday vocabulary
-- Testing only basic synonyms
-- Overly obscure or archaic words
-
-FOCUS ON:
-- Words that show academic register
-- Collocations common in academic writing
-- Nuanced distinctions between similar terms
-`
+- Test a word that C1-C2 learners need but often avoid
+- Context must clearly indicate the correct choice
+- Avoid testing the same words repeatedly (be creative)
+- Focus on: ${specificFocus}
+`;
+        }
     },
     {
         id: 'grammar',
@@ -64,27 +172,32 @@ FOCUS ON:
         description: 'Grammar rules and sentence structure',
         icon: '⚙️',
         color: 'emerald',
-        prompt: (config) => `
+        prompt: (config) => {
+            const specificFocus = getTopicVariation(config.topic);
+            const varietyInstruction = getVarietyInstruction();
+            const grammarTypes = getRandomSubset(VocabPools.grammar, 3).join(', ');
+            
+            return `
 CONTENT FOCUS: GRAMMAR & STRUCTURE ONLY
-Test sophisticated grammatical structures common in academic ${config.topic} writing.
+Specific context: ${specificFocus} within ${config.topic}.
 
-GRAMMAR TOPICS TO COVER:
-- Tense usage: present perfect vs simple past, future perfect, continuous aspects
-- Passive voice and nominalization (turning verbs into nouns)
-- Articles: a/an/the/zero article in academic contexts
-- Prepositions: dependent prepositions after verbs/adjectives (interested IN, focus ON, responsible FOR)
-- Conditionals: mixed conditionals, inverted conditionals
-- Subjunctive and formal structures
-- Relative clauses: defining vs non-defining, preposition placement
-- Parallel structure and agreement
-- Word order in complex sentences
-- Modals for deduction and probability
+${varietyInstruction}
 
-INCLUDE:
-- Explicit time markers or context clues
-- Complex sentence structures typical of academic writing
-- Formal, impersonal constructions
-`
+GRAMMAR ASPECTS (choose one): ${grammarTypes}
+
+CONTEXT TO INCLUDE:
+- Time markers or explicit context for tense questions
+- Complex noun phrases for agreement questions
+- Academic register markers for formality questions
+- Source attribution for citation/integration questions
+
+REQUIREMENTS:
+- Create a sophisticated sentence about ${specificFocus}
+- Make the grammar point essential to meaning, not arbitrary
+- Avoid simplistic right/wrong - test nuanced understanding
+- Level: ${config.difficulty}
+`;
+        }
     }
 ];
 
@@ -101,7 +214,7 @@ const FormatBlueprints = [
         color: 'slate',
         prompt: (contentPrompt, config) => `${contentPrompt}
 
-FORMAT: RANDOM - Choose any engaging question format appropriate for the content.`
+FORMAT: RANDOM - Choose any engaging format, but make it fresh and unexpected.`
     },
     {
         id: 'cloze_test',
@@ -110,27 +223,30 @@ FORMAT: RANDOM - Choose any engaging question format appropriate for the content
         description: 'Complete the sentence with the correct word',
         icon: '📝',
         color: 'blue',
-        prompt: (contentPrompt, config) => `${contentPrompt}
+        prompt: (contentPrompt, config) => {
+            const clozeExamples = [
+                'The preliminary findings failed to _____ the hypothesis, necessitating a revised approach.',
+                'A _____ body of evidence now contradicts the earlier assumptions about this phenomenon.',
+                'The researchers were compelled to _____ their methodology in light of new data.',
+                'Such results would inevitably _____ further investigation into the underlying mechanisms.',
+                'The study aims to _____ light on previously unexplored aspects of the theory.'
+            ];
+            const randomExample = clozeExamples[Math.floor(Math.random() * clozeExamples.length)];
+            
+            return `${contentPrompt}
 
-FORMAT: FILL IN THE BLANK (Cloze Test)
-Create a fill-in-the-blank question with a single missing word or short phrase.
+FORMAT: FILL IN THE BLANK
+Create a fill-in-the-blank with "_____" as placeholder.
+
+EXAMPLE STYLE (but create your own): "${randomExample}"
 
 REQUIREMENTS:
-- Present one academic sentence with ONE key element replaced by "_____"
-- Context must provide specific, logical clues for the answer
-- The missing item should be the focal point of testing
-
-EXAMPLES:
-- Vocabulary: "The preliminary data failed to _____ the hypothesis, requiring a complete redesign." (substantiate)
-- Grammar: "By the time the conference concludes, the researchers _____ their findings to three journals." (will have submitted)
-- Vocabulary: "A _____ body of evidence contradicts the earlier assumptions." (substantial)
-
-RULES:
-- Use exactly 5 options: 1 correct, 4 plausible distractors
-- All options should be the same part of speech
-- Distractors should be contextually plausible but clearly wrong
-- Include strong contextual clues in the sentence
-`
+- One sentence only, academic and complex
+- Context must strongly indicate the answer
+- 5 options: 1 correct, 4 plausible but wrong
+- Do NOT copy the example above - create original content
+`;
+        }
     },
     {
         id: 'error_correction',
@@ -139,31 +255,30 @@ RULES:
         description: 'Find and fix the mistake in the sentence',
         icon: '🔍',
         color: 'red',
-        prompt: (contentPrompt, config) => `${contentPrompt}
+        prompt: (contentPrompt, config) => {
+            const errorExamples = [
+                { sent: 'The data ***shows*** significant trends.', fix: 'show (data is plural)' },
+                { sent: 'The study ***were*** conducted over five years.', fix: 'was' },
+                { sent: 'The results were ***very*** significant.', fix: 'highly (register)' },
+                { sent: 'The researcher ***did*** an experiment.', fix: 'conducted (formal)' },
+                { sent: 'This ***imply*** that further research is needed.', fix: 'implies' }
+            ];
+            const randomExample = errorExamples[Math.floor(Math.random() * errorExamples.length)];
+            
+            return `${contentPrompt}
 
 FORMAT: ERROR CORRECTION
-Present a complete academic sentence containing ONE deliberate error.
+One sentence with ONE error marked by ***error***.
+
+EXAMPLE STYLE: "${randomExample.sent}" (Fix: ${randomExample.fix})
 
 REQUIREMENTS:
-- Include exactly ONE error in the sentence
-- Mark the error clearly with ***error*** markers (e.g., "The study ***were*** conducted")
-- The error should be a common mistake at ${config.difficulty} level
-
-ERROR TYPES BY CONTENT:
-- Vocabulary: Wrong word choice, register too informal ("very" instead of "highly"), wrong collocation
-- Grammar: Subject-verb disagreement, wrong tense, article error, preposition error, wrong connector
-
-EXAMPLES:
-- Grammar: "The study ***were*** conducted over five years." (were → was)
-- Grammar: "The data ***shows*** significant trends." (shows → show - data is plural)
-- Vocabulary: "The results were ***very*** significant." (very → highly - register too informal)
-- Vocabulary: "The researcher ***did*** an experiment." (did → conducted - wrong register)
-
-OPTIONS:
-- Provide 5 corrected versions of the sentence
-- OR provide 5 options for the specific word that needs correction
-- Include the error-free sentence as one option
-`
+- Create your own original sentence
+- Mark the error clearly with ***word***
+- Error should be common at ${config.difficulty} level
+- 5 corrected versions as options
+`;
+        }
     },
     {
         id: 'word_formation',
@@ -172,34 +287,31 @@ OPTIONS:
         description: 'Transform the word to fit the context',
         icon: '🔄',
         color: 'cyan',
-        prompt: (contentPrompt, config) => `${contentPrompt}
+        prompt: (contentPrompt, config) => {
+            const transformExamples = [
+                { base: 'analyze', forms: ['analysis', 'analyzes', 'analytical', 'analyzing', 'analyzed'] },
+                { base: 'significant', forms: ['significance', 'signify', 'significantly', 'signification', 'significant'] },
+                { base: 'controversy', forms: ['controversial', 'controversially', 'controvert', 'controverted', 'controversies'] },
+                { base: 'empirical', forms: ['empirically', 'empiricism', 'empiricist', 'empirics', 'empiric'] },
+                { base: 'method', forms: ['methodology', 'methodological', 'methodically', 'methodologies', 'methodist'] }
+            ];
+            const randomExample = transformExamples[Math.floor(Math.random() * transformExamples.length)];
+            
+            return `${contentPrompt}
 
 FORMAT: WORD FORMATION
-Present a sentence requiring transformation of a base word to fit grammatically.
+Base word in parentheses, blank to fill with transformed form.
+
+EXAMPLE: "The _____ (${randomExample.base}) of the data..." 
+Options: [${randomExample.forms.join(', ')}]
 
 REQUIREMENTS:
-- Show a base word in parentheses: (analyze), (significant), (controversy)
-- The answer must be a different form of that word
-- Include "_____" where the transformed word belongs
-
-TRANSFORMATION TYPES:
-- Noun → Verb: "The _____ (analysis) revealed..." (analysis → analyzed)
-- Verb → Noun: "The _____ (investigate) showed..." (investigate → investigation)
-- Adjective → Noun: "The _____ (significant) of this..." (significant → significance)
-- Noun → Adjective: "A highly _____ (controversy) theory" (controversy → controversial)
-- Verb → Adjective: "The _____ (predict) outcome" (predict → predicted/predictable)
-
-EXAMPLES:
-- "The _____ (analyze) of the data revealed patterns." (analysis)
-- "The theory remains highly _____ (controversy)." (controversial)
-- "This is a _____ (predict) result given the circumstances." (predictable)
-
-RULES:
-- Base word should be commonly known
-- Transformed word must be academic register
-- Provide 5 different forms of the same word root
-- Only ONE form should fit both grammatically AND semantically
-`
+- Create original sentence with your own word choice
+- Transform must change word class (noun↔verb↔adjective)
+- Only ONE option fits both grammatically AND semantically
+- Use academic vocabulary appropriate for ${config.difficulty}
+`;
+        }
     },
     {
         id: 'collocation',
@@ -208,33 +320,30 @@ RULES:
         description: 'Complete common academic word combinations',
         icon: '🔗',
         color: 'orange',
-        prompt: (contentPrompt, config) => `${contentPrompt}
+        prompt: (contentPrompt, config) => {
+            const collocations = [
+                { phrase: '_____ a conclusion', answer: 'draw/reach', distractors: ['make', 'get', 'have', 'do'] },
+                { phrase: '_____ light on', answer: 'shed/throw', distractors: ['put', 'give', 'send', 'cast'] },
+                { phrase: '_____ research', answer: 'conduct/carry out', distractors: ['make', 'do', 'get', 'have'] },
+                { phrase: '_____ evidence', answer: 'substantial/compelling', distractors: ['big', 'much', 'high', 'strong'] },
+                { phrase: '_____ attention to', answer: 'pay/give', distractors: ['make', 'put', 'set', 'place'] }
+            ];
+            const randomColl = collocations[Math.floor(Math.random() * collocations.length)];
+            
+            return `${contentPrompt}
 
 FORMAT: ACADEMIC COLLOCATION
-Test knowledge of word partnerships (collocations) common in academic writing.
+Test word partnership (collocation).
+
+EXAMPLE: "The study aims to ${randomColl.phrase} the issue."
 
 REQUIREMENTS:
-- Present a sentence with a missing word that forms a strong collocation
-- The answer must be the specific word that naturally partners with another word in the sentence
-
-COLLOCATION TYPES:
-- Verb + Noun: _____ a conclusion, _____ research, _____ evidence, _____ a study, _____ an experiment
-- Adjective + Noun: _____ evidence, _____ research, _____ analysis, _____ impact, _____ review
-- Adverb + Adjective: _____ significant, _____ different, _____ important, _____ likely, _____ clear
-- Noun + Preposition: interest _____, focus _____ , approach _____, reaction _____
-
-EXAMPLES:
-- "The study aims to _____ light on the mechanisms." (shed/throw - collocates with 'light')
-- "A _____ body of evidence supports this." (substantial/growing - collocates with 'body')
-- "Results were _____ interpreted." (cautiously/duly - collocates with 'interpreted')
-- "The research _____ on previous studies." (draws/builds - collocates with 'on')
-
-RULES:
-- Test authentic academic collocations, not arbitrary combinations
-- Distractors should be plausible verbs/adjectives but NOT collocate naturally
-- Context should make grammatical sense with all options, but only ONE is the natural collocation
-- Focus on high-frequency academic collocations
-`
+- Create fresh collocation (not the example above)
+- Use authentic academic partnerships
+- All options grammatically possible, only ONE natural
+- Context must make the partnership clear
+`;
+        }
     },
     {
         id: 'register_shift',
@@ -243,34 +352,32 @@ RULES:
         description: 'Transform casual language to academic style',
         icon: '✨',
         color: 'indigo',
-        prompt: (contentPrompt, config) => `${contentPrompt}
+        prompt: (contentPrompt, config) => {
+            const registerExamples = [
+                { informal: 'The results were really good.', formal: 'highly favorable/substantial/promising' },
+                { informal: 'Scientists looked at the data.', formal: 'examined/investigated/analyzed' },
+                { informal: 'This theory has a lot of problems.', formal: 'considerable/substantial limitations' },
+                { informal: 'The study found out that...', formal: 'determined/ascertained that' },
+                { informal: 'We got the data from...', formal: 'obtained/acquired/derived the data from' }
+            ];
+            const randomExample = registerExamples[Math.floor(Math.random() * registerExamples.length)];
+            
+            return `${contentPrompt}
 
-FORMAT: REGISTER ADAPTATION (Informal → Formal)
-Present an informal statement and ask for the formal academic equivalent.
+FORMAT: REGISTER ADAPTATION
+Informal → Formal transformation.
+
+EXAMPLE STYLE:
+Informal: "${randomExample.informal}"
+Formal: "${randomExample.informal.replace(/really good|looked at|a lot of|found out|got/g, '_____')}"
 
 REQUIREMENTS:
-- Show an informally-worded statement about ${config.topic}
-- Ask for the formal academic replacement for a specific informal word/phrase
-- Use format: "Informal: [sentence]. Formal: [sentence with _____]"
-
-INFORMAL MARKERS TO TRANSFORM:
-- Phrasal verbs: "look at" → examine/investigate, "find out" → determine/ascertain
-- Simple words: "big" → substantial/significant, "good" → favorable/promising
-- Casual expressions: "a lot of" → considerable/substantial, "get" → obtain/acquire
-- Contractions and simple structures → Complex nominalized structures
-- Personal pronouns → Impersonal constructions
-
-EXAMPLES:
-- "Informal: The results were really good. Formal: The results were _____" (highly favorable/substantial/promising)
-- "Informal: Scientists looked at how cells grow. Formal: Scientists _____ cell growth." (examined/investigated)
-- "Informal: This theory has a lot of problems. Formal: This theory has _____ limitations." (considerable/substantial)
-
-RULES:
-- Informal version should be clearly conversational (contractions, simple words, phrasal verbs)
-- Formal options should be genuinely academic (Latin-based, technical, nominalized)
-- 5 formal alternatives with varying degrees of appropriateness
-- Only the best academic option is correct
-`
+- Create your own informal sentence
+- Use clearly casual language (contractions, phrasal verbs, simple words)
+- Formal options must be genuinely academic
+- Only the best register choice is correct
+`;
+        }
     }
 ];
 
