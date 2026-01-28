@@ -24,7 +24,8 @@ const app = {
     config: {
         difficulty: Difficulty.ADVANCED,
         topic: 'General Science',
-        category: QuestionCategory.MIXED
+        contentBlueprint: 'mixed',      // What to study
+        formatBlueprint: 'random'       // How to practice
     },
     questions: [],
     responses: [],
@@ -36,17 +37,56 @@ const app = {
 
     // Initialize
     init() {
+        this.renderBlueprintButtons();
         this.bindEvents();
+    },
+
+    // Render blueprint buttons dynamically
+    renderBlueprintButtons() {
+        // Render content buttons (What to study)
+        const contentContainer = document.getElementById('content-buttons');
+        if (contentContainer && typeof ContentBlueprints !== 'undefined') {
+            contentContainer.innerHTML = ContentBlueprints.map((bp, index) => `
+                <button class="option-btn ${index === 0 ? 'active' : ''}" data-value="${bp.id}">
+                    <span class="btn-icon">${bp.icon}</span>
+                    <span class="btn-title">${bp.shortName}</span>
+                    <span class="btn-subtitle">${bp.description}</span>
+                </button>
+            `).join('');
+        }
+
+        // Render format buttons (How to practice)
+        const formatContainer = document.getElementById('format-buttons');
+        if (formatContainer && typeof FormatBlueprints !== 'undefined') {
+            formatContainer.innerHTML = FormatBlueprints.map((bp, index) => `
+                <button class="option-btn ${index === 0 ? 'active' : ''}" data-value="${bp.id}">
+                    <span class="blueprint-icon">${bp.icon}</span>
+                    <span class="blueprint-label">${bp.shortName}</span>
+                    <span class="blueprint-subtitle">${bp.description}</span>
+                </button>
+            `).join('');
+        }
     },
 
     // Bind Events
     bindEvents() {
-        // Category buttons
-        document.querySelectorAll('#category-buttons .option-btn').forEach(btn => {
+        // Content blueprint buttons (What to study)
+        document.querySelectorAll('#content-buttons .option-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                document.querySelectorAll('#category-buttons .option-btn').forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                this.config.category = e.target.dataset.value;
+                const button = e.target.closest('.option-btn');
+                document.querySelectorAll('#content-buttons .option-btn').forEach(b => b.classList.remove('active'));
+                button.classList.add('active');
+                this.config.contentBlueprint = button.dataset.value;
+            });
+        });
+
+        // Format blueprint buttons (How to practice)
+        document.querySelectorAll('#format-buttons .option-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const button = e.target.closest('.option-btn');
+                document.querySelectorAll('#format-buttons .option-btn').forEach(b => b.classList.remove('active'));
+                button.classList.add('active');
+                this.config.formatBlueprint = button.dataset.value;
             });
         });
 
@@ -84,8 +124,25 @@ const app = {
             // Prefetch next question in background
             this.prefetchNextQuestion();
         } catch (err) {
-            this.showError(err.message || "Failed to generate question. Check your API key or connection.");
-            this.setState(AppState.SETUP);
+            const errorMessage = err.message || "";
+            let userMessage;
+            
+            if (errorMessage.includes('capacity') || errorMessage.includes('429') || errorMessage.includes('503')) {
+                userMessage = "⏳ Mistral AI is at capacity. Retrying with fallback model... Please wait.";
+            } else if (errorMessage.includes('API key') || errorMessage.includes('401')) {
+                userMessage = "🔑 API key error. Please check your Mistral API configuration.";
+            } else if (errorMessage.includes('network') || errorMessage.includes('fetch')) {
+                userMessage = "📡 Network error. Please check your internet connection.";
+            } else {
+                userMessage = "❌ Failed to generate question: " + errorMessage;
+            }
+            
+            this.showError(userMessage);
+            
+            // Don't go back to setup immediately if it's a capacity issue - auto-retry is happening
+            if (!errorMessage.includes('capacity')) {
+                this.setState(AppState.SETUP);
+            }
         }
     },
 
@@ -159,7 +216,12 @@ const app = {
                 // Prefetch next
                 this.prefetchNextQuestion();
             } catch (err) {
-                this.showError(err.message || "Failed to generate next question.");
+                const errorMessage = err.message || "";
+                if (errorMessage.includes('capacity')) {
+                    this.showError("⏳ AI service busy. Please wait a moment and try again.");
+                } else {
+                    this.showError("❌ Failed to generate next question. Please try again.");
+                }
                 // Go back to showing the last question
                 this.setState(AppState.EXAM);
                 this.isFeedbackMode = true;
@@ -233,6 +295,11 @@ const app = {
         document.getElementById('progress-fill').style.width = `${progress}%`;
     },
 
+    // Get format display name with icon
+    getFormatDisplay(formatId) {
+        return getFormatDisplayName(formatId);
+    },
+
     // Render Question
     renderQuestion() {
         if (!this.currentQuestion) return;
@@ -242,22 +309,46 @@ const app = {
         // Header
         document.getElementById('academic-context').textContent = question.academicContext;
         const categoryTag = document.getElementById('category-tag');
-        categoryTag.textContent = question.category;
-        categoryTag.className = `tag tag-${question.category.toLowerCase()}`;
+        
+        // Show format type if available
+        const formatName = question.blueprint ? 
+            this.getFormatDisplay(question.blueprint) : 
+            'Question';
+        categoryTag.textContent = formatName;
+        categoryTag.className = `tag tag-${question.category?.toLowerCase() || 'mixed'}`;
 
-        // Sentence with blank
+        // Sentence display based on blueprint type
         const sentenceEl = document.getElementById('question-sentence');
-        const parts = question.sentence.split('_____');
-        let sentenceHTML = '"';
-        parts.forEach((part, i) => {
-            sentenceHTML += part;
-            if (i < parts.length - 1) {
-                const blankContent = this.isFeedbackMode ? question.options[question.correctIndex] : '';
-                const blankClass = this.isFeedbackMode ? 'blank blank-filled' : 'blank';
-                sentenceHTML += `<span class="${blankClass}">${blankContent}</span>`;
-            }
-        });
-        sentenceHTML += '"';
+        let sentenceHTML = '';
+        
+        if (question.blueprint === 'register_shift' && question.sentence.includes('Informal:')) {
+            // Special formatting for register shift
+            const parts = question.sentence.split('Formal:');
+            sentenceHTML = `<div class="register-comparison">
+                <div class="register-informal">"${parts[0].replace('Informal:', '').trim()}"</div>
+                <div class="register-arrow">↓</div>
+                <div class="register-formal">"${parts[1].trim()}"</div>
+            </div>`;
+        } else if (question.blueprint === 'error_correction' && question.sentence.includes('***')) {
+            // Highlight error in red
+            sentenceHTML = '"' + question.sentence.replace(/\*\*(.*?)\*\*/g, '<span class="error-highlight">$1</span>') + '"';
+        } else if (question.sentence.includes('_____')) {
+            // Standard cloze format
+            const parts = question.sentence.split('_____');
+            sentenceHTML = '"';
+            parts.forEach((part, i) => {
+                sentenceHTML += part;
+                if (i < parts.length - 1) {
+                    const blankContent = this.isFeedbackMode ? question.options[question.correctIndex] : '';
+                    const blankClass = this.isFeedbackMode ? 'blank blank-filled' : 'blank';
+                    sentenceHTML += `<span class="${blankClass}">${blankContent}</span>`;
+                }
+            });
+            sentenceHTML += '"';
+        } else {
+            sentenceHTML = '"' + question.sentence + '"';
+        }
+        
         sentenceEl.innerHTML = sentenceHTML;
 
         // Options

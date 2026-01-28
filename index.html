@@ -65,12 +65,31 @@
                     <p class="setup-subtitle">Precision evaluation for Vocabulary & Grammar.<br>Questions generated one at a time. Answer as many as you like!</p>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Evaluation Focus</label>
-                    <div class="button-grid" id="category-buttons">
-                        <button class="option-btn active" data-value="Mixed">Mixed</button>
-                        <button class="option-btn" data-value="Vocabulary">Vocabulary</button>
-                        <button class="option-btn" data-value="Grammar">Grammar</button>
+                <!-- WHAT TO STUDY -->
+                <div class="form-group form-section">
+                    <div class="section-header">
+                        <span class="section-number">1</span>
+                        <div class="section-title-wrap">
+                            <label class="form-label">What do you want to study?</label>
+                            <p class="section-help">Choose the skill you want to improve</p>
+                        </div>
+                    </div>
+                    <div class="button-grid" id="content-buttons">
+                        <!-- Generated from ContentBlueprints -->
+                    </div>
+                </div>
+
+                <!-- HOW TO PRACTICE -->
+                <div class="form-group form-section">
+                    <div class="section-header">
+                        <span class="section-number">2</span>
+                        <div class="section-title-wrap">
+                            <label class="form-label">How do you want to practice?</label>
+                            <p class="section-help">Choose your question format</p>
+                        </div>
+                    </div>
+                    <div class="button-grid blueprint-grid" id="format-buttons">
+                        <!-- Generated from FormatBlueprints -->
                     </div>
                 </div>
 
@@ -193,6 +212,7 @@
         </div>
     </main>
 
+    <script src="blueprints.js"></script>
     <script src="mistralService.js"></script>
     <script src="app.js"></script>
 </body>
