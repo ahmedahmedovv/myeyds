@@ -281,6 +281,52 @@
             line-height: 1.55;
         }
 
+        .explanation-list {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .explanation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .explanation-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .explanation-item .opt-label {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .explanation-item.correct .opt-label {
+            background: #10b981;
+            color: white;
+        }
+
+        .explanation-item.wrong .opt-label {
+            background: #ef4444;
+            color: white;
+        }
+
+        .explanation-item .opt-text {
+            color: #475569;
+        }
+
         /* Button */
         .btn-next {
             width: 100%;
@@ -487,16 +533,22 @@ The correct answer MUST be: "${word}"
 Requirements:
 - Write a sentence (15-25 words) where "${word}" fits naturally in the blank _____
 - Provide exactly 5 word options including "${word}"
-- "${word}" must be the correct answer
+- "${word}" must be the correct answer (index 0)
 - Other 4 options should be plausible but wrong
-- Include a brief explanation of why "${word}" is correct
+- For EACH option, provide a brief explanation of why it is correct or wrong in this context
 
 Respond with JSON only:
 {
   "sentence": "Scientists _____ the data to identify patterns.",
   "options": ["analyze", "memorize", "organize", "summarize", "visualize"],
   "correctIndex": 0,
-  "explanation": "'Analyze' means to examine in detail, which fits the scientific context of identifying patterns in data."
+  "explanations": [
+    "'Analyze' is correct because it means to examine in detail, which fits the scientific context of identifying patterns in data.",
+    "'Memorize' is wrong because it means to commit to memory, which doesn't fit the context of working with data to find patterns.",
+    "'Organize' is wrong because while related to data, it means to arrange systematically, not to examine for patterns.",
+    "'Summarize' is wrong because it means to give a brief overview, not to examine details for patterns.",
+    "'Visualize' is wrong because it means to form a mental image, which is a result of analysis, not the process itself."
+  ]
 }`;
     }
 };
@@ -598,7 +650,30 @@ Respond with JSON only:
                 if (i === currentQuestion.correctIndex && !isCorrect) btn.classList.add('revealed');
             });
 
-            feedbackText.textContent = currentQuestion.explanation;
+            // Build detailed feedback with all explanations
+            const keys = ['A', 'B', 'C', 'D', 'E'];
+            let feedbackHTML = '';
+            
+            // Use new explanations array if available, fallback to single explanation
+            if (currentQuestion.explanations && currentQuestion.explanations.length === 5) {
+                feedbackHTML = '<div class="explanation-list">';
+                currentQuestion.options.forEach((opt, i) => {
+                    const isOptCorrect = i === currentQuestion.correctIndex;
+                    const explanation = currentQuestion.explanations[i] || '';
+                    feedbackHTML += `
+                        <div class="explanation-item ${isOptCorrect ? 'correct' : 'wrong'}">
+                            <span class="opt-label">${keys[i]}</span>
+                            <span class="opt-text"><strong>${opt}:</strong> ${explanation}</span>
+                        </div>
+                    `;
+                });
+                feedbackHTML += '</div>';
+            } else {
+                // Fallback to single explanation
+                feedbackHTML = `<p>${currentQuestion.explanation}</p>`;
+            }
+            
+            feedbackText.innerHTML = feedbackHTML;
             feedback.classList.remove('hidden');
             btnNext.classList.remove('hidden');
         }
