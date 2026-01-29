@@ -624,6 +624,21 @@ Respond with JSON only:
         function displayQuestion() {
             sentence.innerHTML = currentQuestion.sentence.replace(/_____/g, '<span class="blank">_____</span>');
 
+            // Shuffle options while tracking the correct answer's new position
+            const originalCorrectIndex = currentQuestion.correctIndex;
+            const indexed = currentQuestion.options.map((opt, i) => ({ opt, origIndex: i, explanation: currentQuestion.explanations?.[i] }));
+            for (let i = indexed.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+            }
+
+            // Update currentQuestion with shuffled data
+            currentQuestion.options = indexed.map(x => x.opt);
+            currentQuestion.correctIndex = indexed.findIndex(x => x.origIndex === originalCorrectIndex);
+            if (currentQuestion.explanations) {
+                currentQuestion.explanations = indexed.map(x => x.explanation);
+            }
+
             const keys = ['A', 'B', 'C', 'D', 'E'];
             options.innerHTML = currentQuestion.options.map((opt, i) => `
                 <button class="option" data-index="${i}">
