@@ -526,15 +526,22 @@ const CONFIG = {
     maxTokens: 1024,
 
     getPrompt: function(word) {
+        const isMultiWord = word.includes(' ');
+        const typeHint = isMultiWord
+            ? `IMPORTANT: "${word}" is a multi-word expression. ALL 5 options must be multi-word expressions of the same type (e.g., all phrasal verbs, all prepositional phrases, or all connectors). Do NOT mix single words with multi-word expressions.`
+            : '';
+
         return `You are an academic English instructor. Create ONE fill-in-the-blank question.
 
 The correct answer MUST be: "${word}"
+
+${typeHint}
 
 Requirements:
 - Write a sentence (25-40 words) with rich context where "${word}" is the ONLY natural fit in the blank _____
 - Include specific details (setting, subject matter, relationships between ideas) to make the correct choice unambiguous
 - The sentence should feel authentic to academic writing (research papers, essays, lectures, or formal discussions)
-- Provide exactly 5 word options including "${word}"
+- Provide exactly 5 options including "${word}" - all options must be the same grammatical type
 - "${word}" must be the correct answer (index 0)
 - Other 4 options should be plausible distractors that would NOT fit naturally given the specific context
 - For EACH option, explain why it is correct or wrong based on the specific context clues in the sentence
