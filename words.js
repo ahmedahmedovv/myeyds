@@ -65,16 +65,17 @@ const WORDS = {
     ],
 
     prepositions: [
-        'according to', 'ahead of', 'apart from', 'as for', 'as to', 'aside from', 'because of', 'contrary to', 'due to', 'except for',
-        'in addition to', 'in spite of', 'in terms of', 'on behalf of', 'owing to', 'prior to', 'regardless of', 'with regard to', 'with respect to', 'in light of',
-        'alongside', 'amidst', 'amongst', 'apropos', 'barring', 'beyond', 'by means of', 'concerning', 'considering', 'despite',
-        'following', 'including', 'inside', 'instead of', 'into', 'notwithstanding', 'onto', 'opposite', 'outside', 'per',
-        'pursuant to', 'regarding', 'throughout', 'towards', 'underneath', 'unlike', 'until', 'upon', 'versus', 'via',
-        'within', 'without', 'atop', 'beneath', 'between', 'during', 'near', 'off', 'since', 'under',
-        'across from', 'as opposed to', 'at the risk of', 'back to', 'but for', 'by dint of', 'by virtue of', 'close to', 'for the sake of', 'in accordance with',
-        'in back of', 'in case of', 'in compliance with', 'in consequence of', 'in front of', 'in lieu of', 'in place of', 'in proximity to', 'in relation to', 'in return for',
-        'in the event of', 'in the face of', 'in the middle of', 'near to', 'next to', 'on account of', 'on top of', 'out of', 'preparatory to', 'previous to',
-        'relative to', 'subsequent to', 'thanks to', 'together with', 'up to', 'with a view to', 'with the exception of', 'within reach of', 'without respect to', 'vis-à-vis'
+        'about', 'above', 'across', 'after', 'against', 'along', 'among', 'around', 'at', 'before',
+        'behind', 'below', 'beneath', 'beside', 'between', 'beyond', 'by', 'down', 'during', 'except',
+        'for', 'from', 'in', 'inside', 'into', 'near', 'of', 'off', 'on', 'onto',
+        'out', 'outside', 'over', 'past', 'since', 'through', 'throughout', 'to', 'toward', 'under',
+        'underneath', 'until', 'up', 'upon', 'with', 'within', 'without',
+        // Common academic and multi-word prepositions/phrases:
+        'according to', 'as a result of', 'in addition to', 'in accordance with', 'in case of', 'in comparison with',
+        'in consequence of', 'in contrast to', 'in front of', 'in light of', 'in opposition to', 'in place of',
+        'in relation to', 'in respect of', 'in terms of', 'in view of', 'on account of', 'on behalf of',
+        'on the basis of', 'with regard to', 'with respect to', 'with a view to', 'as opposed to', 'contrary to',
+        'due to', 'prior to', 'subsequent to', 'pertaining to', 'in response to', 'with reference to'
     ],
 
     phrasal: [
