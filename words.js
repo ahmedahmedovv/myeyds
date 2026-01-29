@@ -89,7 +89,37 @@ const WORDS = {
         'keep up', 'lead to', 'leave out', 'let down', 'listen to', 'look after', 'look for', 'look forward to', 'look up to', 'make out',
         'object to', 'occur to', 'part with', 'pass away', 'pay attention to', 'pick up', 'play down', 'point at', 'provide for', 'put off',
         'rely on', 'refer to', 'run into', 'run out of', 'send out', 'set off', 'show up', 'stand for', 'stem from', 'stick to',
-        'sum up', 'take after', 'take over', 'talk about', 'think over', 'try out', 'turn down', 'turn into', 'use up', 'wait for'
+        'sum up', 'take after', 'take over', 'talk about', 'think over', 'try out', 'turn down', 'turn into', 'use up', 'wait for',
+
+        // 200 additional phrasal verbs relevant to academic/professional/advanced English:
+        'abide by', 'act on', 'add up to', 'apply for', 'argue for', 'ask for', 'attend to', 'average out', 'base on', 'be made up of',
+        'bear on', 'block out', 'boil down to', 'branch out', 'bring down', 'bring in', 'bring out', 'bring together', 'build up', 'call in',
+        'cancel out', 'carry over', 'carry through', 'catch on', 'catch up on', 'check in', 'check up on', 'chip in', 'clam up', 'clamp down on',
+        'come about', 'come across as', 'come along', 'come apart', 'come before', 'come by', 'come down to', 'come in for', 'come out', 'come to',
+        'come up', 'conform to', 'contribute to', 'convert to', 'cut out', 'deal in', 'depend upon', 'dig into', 'disagree with', 'dwell on',
+        'enter into', 'expand on', 'explain away', 'fall behind', 'fall for', 'fall through', 'figure on', 'fill out', 'find against', 'find for',
+        'flag up', 'follow from', 'follow through', 'follow up on', 'freeze out', 'get across', 'get ahead', 'get around', 'get around to', 'get down to',
+        'get in', 'get in on', 'get into', 'get off', 'get on', 'get out', 'get round', 'get rid of', 'get together', 'get up to',
+        'give away', 'give off', 'give out', 'go about', 'go against', 'go along with', 'go by', 'go down', 'go for', 'go in for',
+        'go on to', 'go out', 'go over', 'go under', 'grow out of', 'hammer out', 'hand down', 'hand in', 'hand out', 'hand over',
+        'hang on', 'hear from', 'hear of', 'hit on', 'hold down', 'hold up', 'hook up', 'hush up', 'join in', 'keep at',
+        'keep back', 'keep off', 'keep out', 'kick in', 'knock down', 'lay out', 'leave off', 'let out', 'level off', 'line up',
+        'live up to', 'log in', 'log out', 'look out', 'look over', 'look round', 'look upon', 'make away with', 'make for', 'make up for',
+        'meet up', 'narrow down', 'open up', 'opt in', 'opt out', 'pass down', 'pass for', 'pass on', 'pass out', 'pass up',
+        'pay for', 'phase in', 'phase out', 'pick out', 'pile up', 'pin down', 'play out', 'point to', 'press ahead', 'press for',
+        'press on', 'print out', 'proceed with', 'put aside', 'put forth', 'put in', 'put in for', 'put together', 'quote from', 'reach out to',
+        'react to', 'reason out', 'reflect on', 'relate to', 'remind of', 'report back', 'resort to', 'result from', 'revert to', 'ring up',
+        'root out', 'rule out of', 'run by', 'run through', 'see to', 'seek out', 'settle for', 'settle on', 'set aside', 'set forth',
+        'set out', 'shape up', 'shut down', 'single out', 'sit in on', 'size up', 'sort out', 'speak for', 'speak out', 'spell out',
+        'spread out', 'stand against', 'stand by', 'stand out', 'stand up for', 'step in', 'step up', 'stick with', 'stir up', 'straighten out',
+        'substitute for', 'sum over', 'switch off', 'switch on', 'take apart', 'take back', 'take in', 'take on', 'take out', 'take part in',
+        'take up', 'talk over', 'tear down', 'tie in with', 'track down', 'transact with', 'turn away', 'turn back', 'turn in', 'turn on',
+        'turn over', 'use for', 'vacate for', 'ward off', 'wash out', 'weed out', 'weigh in', 'weigh on', 'wind down', 'work out',
+        'write out', 'write up', 'zero in on', 'zoom in on', 'call back', 'cut in', 'back out', 'bounce back', 'break off', 'bring back',
+        'call back on', 'mark down', 'mess up', 'move along', 'move on', 'nod off', 'pay off', 'pop up', 'pull down', 'pull in',
+        'pull through', 'push for', 'put down', 'reach for', 'roll out', 'run down', 'run off', 'send for', 'set aside for', 'shut in',
+        'shut out', 'stay up', 'take down', 'take off', 'take on board', 'talk down', 'talk through', 'think ahead', 'think back', 'think through',
+        'turn up', 'wait on', 'walk through', 'wrap up', 'write down', 'write in'
     ],
 
     connectors: [
