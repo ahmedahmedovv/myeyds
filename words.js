@@ -20,7 +20,18 @@ const WORDS = {
         'integrate', 'intervene', 'investigate', 'justify', 'locate', 'manipulate', 'negate', 'obfuscate', 'obscure', 'optimize',
         'orchestrate', 'outline', 'overcome', 'penetrate', 'perpetuate', 'postulate', 'preclude', 'presuppose', 'proliferate', 'propagate',
         'quantify', 'ratify', 'reconcile', 'refine', 'refute', 'reiterate', 'replicate', 'scrutinize', 'stipulate', 'substantiate',
-        'supersede', 'surmount', 'synthesize', 'transcend', 'validate', 'verify', 'vitiate', 'waive', 'yield', 'augment'
+        'supersede', 'surmount', 'synthesize', 'transcend', 'validate', 'verify', 'vitiate', 'waive', 'yield', 'augment',
+        // Additional 100 academic verbs
+        'abate', 'abide', 'absolve', 'abstain', 'accede', 'accelerate', 'acclaim', 'accommodate', 'accord', 'accost',
+        'accredit', 'accrue', 'accuse', 'ache', 'acknowledge', 'acquaint', 'acquiesce', 'acquit', 'actuate', 'adapt',
+        'adhere', 'adjudicate', 'adjourn', 'adjust', 'administer', 'admire', 'admonish', 'adorn', 'adulterate', 'advance',
+        'adventure', 'advertise', 'advise', 'affect', 'affiliate', 'affirm', 'afflict', 'afford', 'affront', 'aggravate',
+        'aggregate', 'aggrieve', 'agitate', 'agonize', 'alarm', 'alert', 'alienate', 'align', 'allay', 'alleviate',
+        'allocate', 'allot', 'allow', 'allude', 'alter', 'amalgamate', 'amass', 'amaze', 'ambush', 'amend',
+        'amount', 'amplify', 'amuse', 'anesthetize', 'anger', 'animate', 'annex', 'annihilate', 'annotate', 'announce',
+        'annoy', 'annul', 'anoint', 'answer', 'antagonize', 'anticipate', 'apologize', 'appall', 'appeal', 'appear',
+        'appease', 'applaud', 'appoint', 'appraise', 'appreciate', 'apprehend', 'apprentice', 'apprise', 'appropriate', 'approve',
+        'approximate', 'arbitrate', 'argue', 'arise', 'arouse', 'arraign', 'arrange', 'arrest', 'arrive', 'articulate'
     ],
 
     nouns: [
@@ -34,7 +45,18 @@ const WORDS = {
         'diversity', 'domain', 'dynamics', 'efficacy', 'element', 'empirical', 'entity', 'equilibrium', 'equivalence', 'ethics',
         'expansion', 'expertise', 'feasibility', 'fluctuation', 'framework', 'hierarchy', 'ideology', 'incidence', 'infrastructure', 'innovation',
         'instability', 'integration', 'integrity', 'interaction', 'interpretation', 'intervention', 'inventory', 'justification', 'liability', 'limitation',
-        'magnitude', 'manifestation', 'mediation', 'metaphor', 'methodology', 'modality', 'modification', 'motivation', 'negation', 'norm'
+        'magnitude', 'manifestation', 'mediation', 'metaphor', 'methodology', 'modality', 'modification', 'motivation', 'negation', 'norm',
+        // Additional 100 academic nouns
+        'abstraction', 'absurdity', 'abundance', 'academy', 'acceptance', 'access', 'accident', 'acclaim', 'accomplice', 'accomplishment',
+        'accord', 'account', 'accountability', 'accreditation', 'accrual', 'accuracy', 'accusation', 'achievement', 'acid', 'acquaintance',
+        'acquiescence', 'acquisition', 'acquittal', 'acre', 'acrimony', 'action', 'activation', 'actuality', 'actuary', 'acumen',
+        'adaptation', 'addiction', 'addition', 'address', 'adeptness', 'adequacy', 'adherence', 'adjective', 'adjunct', 'adjustment',
+        'administration', 'administrator', 'admiral', 'admiration', 'admissibility', 'admission', 'admittance', 'adobe', 'adolescence', 'adoption',
+        'adoration', 'adornment', 'adrenaline', 'adulation', 'adultery', 'adulthood', 'advance', 'advancement', 'advantage', 'advent',
+        'adventure', 'adversary', 'adversity', 'advertisement', 'advertising', 'advice', 'advocacy', 'aesthetics', 'affair', 'affect',
+        'affection', 'affidavit', 'affiliate', 'affinity', 'affirmation', 'affluence', 'affordability', 'affront', 'aftermath', 'afternoon',
+        'age', 'agency', 'agenda', 'agent', 'aggravation', 'aggregate', 'aggression', 'agony', 'agreement', 'agriculture',
+        'ailment', 'aim', 'air', 'aircraft', 'airline', 'airport', 'alarm', 'album', 'alchemy', 'alcohol'
     ],
 
     adjectives: [
@@ -48,7 +70,18 @@ const WORDS = {
         'differential', 'digital', 'diminutive', 'discreet', 'discrepant', 'discrete', 'discursive', 'disproportionate', 'divergent', 'diverse',
         'dogmatic', 'drastic', 'durable', 'dynamic', 'eclectic', 'economical', 'effective', 'egalitarian', 'elaborate', 'elementary',
         'empirical', 'equivalent', 'erroneous', 'essential', 'ethical', 'evaluative', 'evolutionary', 'exclusive', 'exemplary', 'exhaustive',
-        'existential', 'exogenous', 'experimental', 'explicable', 'extensive', 'extraneous', 'extrinsic', 'feasible', 'finite', 'formal'
+        'existential', 'exogenous', 'experimental', 'explicable', 'extensive', 'extraneous', 'extrinsic', 'feasible', 'finite', 'formal',
+        // Additional 100 academic adjectives
+        'aberrant', 'abhorrent', 'abiding', 'abject', 'ablaze', 'able', 'abnormal', 'abominable', 'aboriginal', 'abortive',
+        'abounding', 'abrasive', 'abrupt', 'absent', 'absolute', 'absorbed', 'absorbing', 'abstract', 'abstruse', 'absurd',
+        'abundant', 'abusive', 'abysmal', 'academic', 'acceptable', 'accepting', 'accessible', 'accidental', 'acclaimed', 'accommodating',
+        'accomplished', 'accordant', 'accountable', 'accurate', 'accursed', 'accusatory', 'accusing', 'acerbic', 'achievable', 'acid',
+        'acidic', 'acknowledged', 'acoustic', 'acrid', 'acrimonious', 'acrobatic', 'actionable', 'active', 'actual', 'actuarial',
+        'acute', 'adamant', 'adaptable', 'adaptive', 'added', 'addictive', 'additional', 'adept', 'adequate', 'adherent',
+        'adhesive', 'adjacent', 'adjoining', 'adjustable', 'administrative', 'admirable', 'admiring', 'admissible', 'adopted', 'adoptive',
+        'adorable', 'adoring', 'adrenalized', 'adroit', 'adult', 'advanced', 'advantageous', 'adventurous', 'adverse', 'advertised',
+        'advisable', 'aerial', 'aesthetic', 'affable', 'affected', 'affectionate', 'affiliated', 'affirmative', 'afflicted', 'affluent',
+        'affordable', 'afraid', 'aggravated', 'aggravating', 'aggressive', 'aggrieved', 'aghast', 'agile', 'aging', 'agitated'
     ],
 
     adverbs: [
@@ -61,7 +94,18 @@ const WORDS = {
         'diametrically', 'differentially', 'diligently', 'distinctly', 'drastically', 'effectively', 'efficiently', 'elaborately', 'empirically', 'entirely',
         'equally', 'erroneously', 'especially', 'exceptionally', 'exclusively', 'explicitly', 'extensively', 'externally', 'extremely', 'frequently',
         'fundamentally', 'gradually', 'hardly', 'historically', 'ideally', 'ideologically', 'implicitly', 'incidentally', 'increasingly', 'independently',
-        'indirectly', 'individually', 'inexorably', 'inherently', 'initially', 'innately', 'inseparably', 'instinctively', 'intensely', 'intentionally'
+        'indirectly', 'individually', 'inexorably', 'inherently', 'initially', 'innately', 'inseparably', 'instinctively', 'intensely', 'intentionally',
+        // Additional 100 academic adverbs
+        'abnormally', 'abruptly', 'absolutely', 'abundantly', 'academically', 'acceptably', 'accessibly', 'accidentally', 'accomplishedly', 'accordantly',
+        'accurately', 'accusingly', 'achingly', 'acidly', 'acoustically', 'acrimoniously', 'actively', 'actually', 'acutely', 'adamantly',
+        'adaptively', 'additionally', 'adequately', 'adhesively', 'adjacently', 'adjustably', 'administratively', 'admirably', 'admiringly', 'admittedly',
+        'adorably', 'adoringly', 'adroitly', 'advantageously', 'adversely', 'advisably', 'aesthetically', 'affably', 'affectedly', 'affectionately',
+        'affirmatively', 'affluently', 'affordably', 'afield', 'afresh', 'aggravatingly', 'aggressively', 'agilely', 'agonizingly', 'agreeably',
+        'ahead', 'aimlessly', 'airily', 'alarmingly', 'alertly', 'algebraically', 'allegedly', 'allegorically', 'alliteratively', 'allowably',
+        'almost', 'aloft', 'alone', 'along', 'already', 'alright', 'also', 'alternately', 'altruistically', 'always',
+        'amateurishly', 'amazedly', 'ambiguously', 'ambitiously', 'amiably', 'amicably', 'amidships', 'amiss', 'amorphously', 'amply',
+        'amusingly', 'analogically', 'analytically', 'anarchically', 'anatomically', 'anciently', 'angrily', 'angularly', 'animatedly', 'annually',
+        'anonymously', 'antagonistically', 'anticlimactically', 'anticipatorily', 'anxiously', 'apathetically', 'apologetically', 'appallingly', 'apparently', 'appealingly'
     ],
 
     prepositions: [
