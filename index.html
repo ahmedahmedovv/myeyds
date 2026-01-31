@@ -526,7 +526,7 @@ Respond with JSON only:
 // APP CODE
 // ═══════════════════════════════════════════════════════════════
 
-let correct = 0, total = 0, currentQuestion = null, prefetched = null;
+let correct = 0, total = 0, currentQuestion = null, prefetched = null, isFirstQuestion = true;
 
 const $ = id => document.getElementById(id);
 const welcomePage = $('welcomePage');
@@ -547,7 +547,18 @@ const scoreEl = $('score');
 function showApp() {
     welcomePage.classList.remove('active');
     appPage.classList.add('active');
-    loadQuestion();
+    // Use prefetched question if available (instant display)
+    if (prefetched && isFirstQuestion) {
+        isFirstQuestion = false;
+        showLoading(false);
+        currentQuestion = prefetched;
+        prefetched = null;
+        displayQuestion();
+        // Prefetch next one in background
+        generateQuestion().then(q => { prefetched = q; }).catch(() => {});
+    } else {
+        loadQuestion();
+    }
 }
 
 function showWelcome() {
@@ -556,6 +567,13 @@ function showWelcome() {
 }
 
 btnStart.onclick = showApp;
+
+// Prefetch first question immediately when page loads
+generateQuestion().then(q => { 
+    prefetched = q; 
+}).catch(err => { 
+    console.error('Failed to prefetch first question:', err); 
+});
 btnBack.onclick = showWelcome;
 
 async function generateQuestion() {
