@@ -350,6 +350,31 @@
 
         .question-area.hidden { display: none; }
 
+        @media (max-height: 700px) {
+            .question-area {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .sentence {
+                flex-shrink: 0;
+            }
+            
+            .options {
+                flex: 1;
+            }
+            
+            .feedback {
+                flex-shrink: 0;
+                max-height: 30vh;
+                overflow-y: auto;
+            }
+            
+            .btn-next {
+                flex-shrink: 0;
+            }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
@@ -567,108 +592,142 @@
             fill: currentColor;
         }
 
-        /* iPhone 13 mini and small phones (375px and below) */
+        /* iPhone 13 mini and small phones (390px and below) */
         @media (max-width: 390px) {
             .welcome-container {
-                padding: 1.25rem 1rem;
-                padding-top: max(1.25rem, env(safe-area-inset-top));
+                padding: 0.75rem 1rem;
+                padding-top: max(0.75rem, env(safe-area-inset-top));
+                justify-content: flex-start;
+                padding-bottom: 1rem;
             }
 
             .welcome-logo {
-                width: 64px;
-                height: 64px;
-                border-radius: 16px;
-                margin-bottom: 1rem;
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+                margin-bottom: 0.5rem;
+                margin-top: 0.5rem;
             }
 
             .welcome-logo svg {
-                width: 32px;
-                height: 32px;
+                width: 24px;
+                height: 24px;
             }
 
             .welcome-title {
-                font-size: 1.4rem;
+                font-size: 1.25rem;
+                margin-bottom: 0.25rem;
             }
 
             .welcome-subtitle {
-                font-size: 0.9rem;
-                margin-bottom: 1.25rem;
+                font-size: 0.85rem;
+                margin-bottom: 0.75rem;
             }
 
             .welcome-features {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-                margin-bottom: 1.25rem;
+                gap: 0.5rem;
+                margin-bottom: 0.75rem;
             }
 
             .welcome-feature {
-                padding: 0.75rem;
+                padding: 0.5rem;
             }
 
             .welcome-feature-icon {
-                font-size: 1.25rem;
+                font-size: 1.1rem;
+                margin-bottom: 0.25rem;
             }
 
             .welcome-feature-title {
-                font-size: 0.7rem;
-            }
-
-            .welcome-feature-desc {
                 font-size: 0.65rem;
             }
 
+            .welcome-feature-desc {
+                font-size: 0.6rem;
+            }
+
             .welcome-description {
-                padding: 1rem;
-                margin-bottom: 1.25rem;
+                padding: 0.75rem;
+                margin-bottom: 0.75rem;
             }
 
             .welcome-description p {
-                font-size: 0.85rem;
-                line-height: 1.6;
+                font-size: 0.8rem;
+                line-height: 1.5;
             }
 
             .btn-start {
-                min-height: 48px;
-                padding: 0.75rem 1.5rem;
+                min-height: 44px;
+                padding: 0.6rem 1.25rem;
                 font-size: 0.9rem;
             }
 
+            .welcome-footer {
+                margin-top: 1rem;
+                font-size: 0.7rem;
+            }
+
+            /* App - Compact layout */
             .app {
                 padding: 0.5rem;
-                padding-top: max(0.5rem, env(safe-area-inset-top));
+                padding-top: max(0.25rem, env(safe-area-inset-top));
                 padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
+            }
+
+            .header {
+                margin-bottom: 0.5rem;
+                flex-shrink: 0;
             }
 
             .header-top {
-                padding-bottom: 0.5rem;
-                margin-bottom: 0.5rem;
+                padding-bottom: 0.35rem;
+                margin-bottom: 0.35rem;
             }
 
             .header h1 {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
 
             .score {
                 font-size: 0.7rem;
+                padding: 0.2rem 0.4rem;
+            }
+
+            /* Question area fills available space */
+            .question-area {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                min-height: 0;
             }
 
             .sentence {
                 font-size: 0.9rem;
-                line-height: 1.6;
-                padding: 0.75rem;
-                margin-bottom: 0.75rem;
+                line-height: 1.5;
+                padding: 0.6rem 0.75rem;
+                margin-bottom: 0.5rem;
+                flex-shrink: 0;
             }
 
             .options {
-                gap: 0.4rem;
-                margin-bottom: 0.75rem;
+                gap: 0.35rem;
+                margin-bottom: 0.5rem;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
             }
 
             .option {
-                min-height: 44px;
+                min-height: 42px;
                 font-size: 0.85rem;
-                padding: 0.5rem 0.65rem;
-                gap: 0.5rem;
+                padding: 0.4rem 0.6rem;
+                gap: 0.4rem;
             }
 
             .option .key {
@@ -678,27 +737,47 @@
             }
 
             .feedback {
-                padding: 0.75rem;
-                margin-bottom: 0.75rem;
+                padding: 0.6rem;
+                margin-bottom: 0.5rem;
+                flex-shrink: 0;
+                max-height: 35vh;
+                overflow-y: auto;
             }
 
             .feedback p {
                 font-size: 0.8rem;
             }
 
+            .explanation-list {
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+            }
+
             .explanation-item {
                 font-size: 0.75rem;
+                margin-bottom: 0.35rem;
             }
 
             .btn-next {
                 min-height: 44px;
-                padding: 0.65rem;
+                padding: 0.6rem;
                 font-size: 0.9rem;
+                flex-shrink: 0;
+                margin-top: auto;
             }
 
             .btn-back {
                 font-size: 0.75rem;
-                margin-bottom: 0.35rem;
+                margin-bottom: 0.25rem;
+                flex-shrink: 0;
+            }
+
+            .loading {
+                padding: 1rem 0;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
         }
 
@@ -1062,6 +1141,8 @@ async function generateQuestion() {
 
 async function loadQuestion() {
     showLoading(true);
+    // Scroll to top when loading new question
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     try {
         currentQuestion = prefetched || await generateQuestion();
         prefetched = null;
@@ -1142,6 +1223,11 @@ function selectAnswer(index) {
     feedbackText.innerHTML = feedbackHTML;
     feedback.classList.remove('hidden');
     btnNext.classList.remove('hidden');
+    
+    // Scroll to show Next button on small screens
+    setTimeout(() => {
+        btnNext.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
 }
 
 function showLoading(show) {
