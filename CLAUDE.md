@@ -6,56 +6,36 @@ A minimal web app for practicing academic English using AI-generated fill-in-the
 
 1. Double-click `index.html` to open in browser
 2. Click "Start Learning" on the welcome page
-3. Select a vocabulary category (Verbs, Nouns, etc.)
-4. Answer questions
-5. Keyboard: **1-5** or **A-E** to answer, **Enter** for next
+3. Answer questions by selecting the correct word
+4. Keyboard: **1-5** or **A-E** to answer, **Enter** for next
 
 ## File Structure
 
 ```
 /
-├── index.html   ← App with integrated welcome page
-├── words.js     ← Word lists (edit this to customize vocabulary)
-└── CLAUDE.md    ← This documentation
+├── index.html    ← Main app with welcome page
+├── mywords.js    ← Vocabulary list (flat array)
+└── CLAUDE.md     ← This documentation
 ```
 
 ## Customizing Words
 
-Edit `words.js` to add, remove, or modify words:
+Edit `mywords.js` to add, remove, or modify words:
 
 ```javascript
-const WORDS = {
-    verbs: [
-        'analyze',
-        'assess',
-        // add or remove words here...
-    ],
-    nouns: [...],
-    adjectives: [...],
-    // etc.
-};
+const MYWORDS = [
+    "analyze",
+    "assess",
+    "in terms of",
+    "consequently",
+    // add or remove words here...
+];
 ```
 
-## Adding a New Category
-
-1. Add word array to `words.js`:
-```javascript
-const WORDS = {
-    // existing categories...
-
-    idioms: [
-        'break the ice',
-        'the bottom line',
-        'think outside the box',
-        // ...
-    ],
-};
-```
-
-2. Add button to `index.html` (in the toggle-group div):
-```html
-<button class="toggle-btn" data-mode="idioms">Idioms</button>
-```
+Words can be:
+- Single words: `"analyze"`, `"comprehensive"`
+- Phrasal verbs: `"account for"`, `"deal with"`
+- Prepositional phrases: `"in terms of"`, `"with regard to"`
 
 ## API Configuration
 
@@ -73,18 +53,6 @@ const CONFIG = {
 };
 ```
 
-## Categories (7 vocabulary categories)
-
-| Category | Examples |
-|----------|----------|
-| Verbs | analyze, assess, evaluate, facilitate |
-| Nouns | approach, concept, evidence, hypothesis |
-| Adjectives | apparent, comprehensive, fundamental |
-| Adverbs | consequently, furthermore, nevertheless |
-| Prepositions | according to, due to, in terms of |
-| Phrasal Verbs | account for, carry out, deal with |
-| Connectors | although, however, therefore, whereas |
-
 ## Keyboard Shortcuts
 
 | Key | Action |
@@ -98,21 +66,23 @@ const CONFIG = {
 - No server required (works with double-click)
 - Uses Mistral AI API
 - Prefetches next question while user answers
-- Score resets when switching categories
+- Flat vocabulary array (no categories)
 
-## Mobile Support
+## Responsive Design
 
-Optimized for iPhone 13 mini (375x812) and other iOS devices:
+Optimized for all screen sizes:
+
+| Breakpoint | Target Devices |
+|------------|----------------|
+| ≤390px | iPhone 13 mini, SE (compact layout) |
+| 391-639px | iPhone 14/15 Pro, Max, Plus |
+| 640-1023px | Tablets, small desktops |
+| ≥1024px | Large desktops |
+
+### iOS Features
 
 - Safe area handling for notch and home indicator
-- 48px minimum touch targets (Apple HIG compliant)
-- Horizontal scrolling category tabs with momentum
+- 44px minimum touch targets (Apple HIG compliant)
 - No double-tap zoom on buttons
 - Add to Home Screen capable
-
-Responsive breakpoints:
-| Screen | Optimizations |
-|--------|---------------|
-| < 375px | Extra compact (iPhone SE) |
-| 375px+ | iPhone 13 mini default |
-| 640px+ | Tablet/desktop layout |
+- `viewport-fit=cover` for edge-to-edge display
