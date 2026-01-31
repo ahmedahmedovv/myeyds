@@ -11,7 +11,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         html {
-            /* Handle safe areas for notch devices */
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
@@ -27,11 +26,197 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* ═══════════════════════════════════════════════════════════════
+           WELCOME PAGE STYLES
+           ═══════════════════════════════════════════════════════════════ */
+
+        .welcome-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #fdfbf7 0%, #f5f0e8 100%);
+        }
+
+        .welcome-container.active {
+            display: flex;
+        }
+
+        .welcome-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(30, 41, 59, 0.15);
+        }
+
+        .welcome-logo svg {
+            width: 40px;
+            height: 40px;
+            fill: #fdfbf7;
+        }
+
+        .welcome-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .welcome-subtitle {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .welcome-description {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            margin-bottom: 2rem;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+            max-width: 100%;
+        }
+
+        .welcome-description p {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .welcome-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .welcome-feature {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .welcome-feature-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-feature-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .welcome-feature-desc {
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+
+        .welcome-categories {
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .welcome-categories-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .welcome-category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .welcome-tag {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 0.4rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .btn-start {
+            width: 100%;
+            max-width: 280px;
+            min-height: 52px;
+            padding: 1rem 2rem;
+            background: #1e293b;
+            color: #fdfbf7;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+        }
+
+        .btn-start:hover {
+            background: #334155;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(30, 41, 59, 0.25);
+        }
+
+        .btn-start:active {
+            transform: translateY(0);
+            background: #475569;
+        }
+
+        .btn-start svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .welcome-footer {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           APP STYLES
+           ═══════════════════════════════════════════════════════════════ */
+
         .app {
             max-width: 600px;
             margin: 0 auto;
             padding: 0.75rem;
             padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+            display: none;
+        }
+
+        .app.active {
+            display: block;
         }
 
         /* Header */
@@ -97,7 +282,6 @@
         }
 
         .toggle-btn {
-            /* Min 44px touch target per Apple HIG */
             min-height: 36px;
             padding: 0.5rem 0.65rem;
             font-family: inherit;
@@ -109,7 +293,6 @@
             color: #64748b;
             transition: all 0.15s ease;
             white-space: nowrap;
-            /* Prevent zoom on double-tap */
             touch-action: manipulation;
         }
 
@@ -196,7 +379,6 @@
             display: flex;
             align-items: center;
             gap: 0.65rem;
-            /* Min 44px touch target per Apple HIG */
             min-height: 48px;
             padding: 0.7rem 0.85rem;
             background: white;
@@ -208,7 +390,6 @@
             color: #1e293b;
             text-align: left;
             transition: all 0.15s ease;
-            /* Prevent zoom on double-tap */
             touch-action: manipulation;
         }
 
@@ -330,7 +511,6 @@
         /* Button */
         .btn-next {
             width: 100%;
-            /* Min 44px touch target */
             min-height: 48px;
             padding: 0.8rem;
             background: #1e293b;
@@ -356,8 +536,49 @@
 
         .btn-next.hidden { display: none; }
 
-        /* Small phones (iPhone SE, etc) - extra compact */
+        /* Back button */
+        .btn-back {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-family: inherit;
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 0.25rem 0;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .btn-back:hover {
+            color: #1e293b;
+        }
+
+        .btn-back svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        /* Small phones */
         @media (max-width: 374px) {
+            .welcome-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+
+            .welcome-features {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-description {
+                padding: 1.25rem;
+            }
+
             .app {
                 padding: 0.5rem;
             }
@@ -380,6 +601,35 @@
 
         /* Tablet & Desktop */
         @media (min-width: 640px) {
+            .welcome-container {
+                padding: 3rem 2rem;
+            }
+
+            .welcome-title {
+                font-size: 2.25rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .welcome-description {
+                padding: 2rem;
+            }
+
+            .welcome-description p {
+                font-size: 1.05rem;
+            }
+
+            .welcome-features {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .btn-start {
+                font-size: 1.1rem;
+                min-height: 56px;
+            }
+
             .app {
                 padding: 2rem 1.5rem;
             }
@@ -451,15 +701,89 @@
     </style>
 </head>
 <body>
-    <div class="app">
-        <!-- Header -->
+    <!-- ═══════════════════════════════════════════════════════════════
+         WELCOME PAGE
+         ═══════════════════════════════════════════════════════════════ -->
+    <div class="welcome-container active" id="welcomePage">
+        <div class="welcome-logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                <path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h3v2H8z"/>
+            </svg>
+        </div>
+
+        <h1 class="welcome-title">Academic English</h1>
+        <p class="welcome-subtitle">Master academic vocabulary with AI-powered practice</p>
+
+        <div class="welcome-description">
+            <p>Improve your academic writing and reading skills through interactive fill-in-the-blank exercises. Our AI generates contextual questions that help you understand how words are used in real academic settings.</p>
+        </div>
+
+        <div class="welcome-features">
+            <div class="welcome-feature">
+                <div class="welcome-feature-icon">📚</div>
+                <div class="welcome-feature-title">300+ Words</div>
+                <div class="welcome-feature-desc">Carefully curated vocabulary</div>
+            </div>
+            <div class="welcome-feature">
+                <div class="welcome-feature-icon">🎯</div>
+                <div class="welcome-feature-title">AI-Powered</div>
+                <div class="welcome-feature-desc">Smart contextual questions</div>
+            </div>
+            <div class="welcome-feature">
+                <div class="welcome-feature-icon">⚡</div>
+                <div class="welcome-feature-title">Instant</div>
+                <div class="welcome-feature-desc">Immediate feedback</div>
+            </div>
+            <div class="welcome-feature">
+                <div class="welcome-feature-icon">📱</div>
+                <div class="welcome-feature-title">Mobile</div>
+                <div class="welcome-feature-desc">Practice anywhere</div>
+            </div>
+        </div>
+
+        <div class="welcome-categories">
+            <div class="welcome-categories-label">Practice Categories</div>
+            <div class="welcome-category-tags">
+                <span class="welcome-tag">Verbs</span>
+                <span class="welcome-tag">Nouns</span>
+                <span class="welcome-tag">Adjectives</span>
+                <span class="welcome-tag">Adverbs</span>
+                <span class="welcome-tag">Prepositions</span>
+                <span class="welcome-tag">Phrasal Verbs</span>
+                <span class="welcome-tag">Connectors</span>
+            </div>
+        </div>
+
+        <button class="btn-start" id="btnStart">
+            Start Learning
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+            </svg>
+        </button>
+
+        <div class="welcome-footer">
+            Press 1-5 or A-E to answer • Enter for next
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         APP PAGE
+         ═══════════════════════════════════════════════════════════════ -->
+    <div class="app" id="appPage">
+        <button class="btn-back" id="btnBack">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+            Back
+        </button>
+
         <header class="header">
             <div class="header-top">
                 <h1>Academic English</h1>
                 <div class="score" id="score">0 / 0</div>
             </div>
 
-            <!-- Vocabulary Categories -->
             <div class="category-section">
                 <div class="category-label">Vocabulary</div>
                 <div class="category-scroll">
@@ -474,33 +798,13 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Grammar Categories -->
-            <div class="category-section">
-                <div class="category-label">Grammar</div>
-                <div class="category-scroll">
-                    <div class="toggle-group" id="grammarGroup">
-                        <button class="toggle-btn" data-mode="relative">Relative Clauses</button>
-                        <button class="toggle-btn" data-mode="noun_clauses">Noun Clauses</button>
-                        <button class="toggle-btn" data-mode="tenses">Tenses</button>
-                        <button class="toggle-btn" data-mode="conditionals">If Clauses</button>
-                        <button class="toggle-btn" data-mode="modals">Modals</button>
-                        <button class="toggle-btn" data-mode="passive">Passive Voice</button>
-                        <button class="toggle-btn" data-mode="quantifiers">Quantifiers</button>
-                        <button class="toggle-btn" data-mode="pronouns">Pronouns</button>
-                        <button class="toggle-btn" data-mode="gerunds">Gerund/Inf/Caus</button>
-                    </div>
-                </div>
-            </div>
         </header>
 
-        <!-- Loading -->
-        <div class="loading" id="loading">
+        <div class="loading hidden" id="loading">
             <div class="spinner"></div>
             <p>Generating question...</p>
         </div>
 
-        <!-- Question -->
         <main class="question-area hidden" id="questionArea">
             <p class="sentence" id="sentence"></p>
             <div class="options" id="options"></div>
@@ -515,9 +819,9 @@
     <script src="words.js"></script>
 
     <script>
-// ╔═══════════════════════════════════════════════════════════╗
-// ║  CONFIG - Edit API settings here                          ║
-// ╚═══════════════════════════════════════════════════════════╝
+// ═══════════════════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════════════════
 
 const CONFIG = {
     apiKey: 'UyFZtjZY3r5aNe1th2qtx6IBLynCc0ai',
@@ -562,192 +866,199 @@ Respond with JSON only:
     }
 };
 
-// ╔═══════════════════════════════════════════════════════════╗
-// ║  APP CODE                                                 ║
-// ╚═══════════════════════════════════════════════════════════╝
+// ═══════════════════════════════════════════════════════════════
+// APP CODE
+// ═══════════════════════════════════════════════════════════════
 
-        let correct = 0, total = 0, currentQuestion = null, prefetched = null;
-        let mode = 'verbs';
+let correct = 0, total = 0, currentQuestion = null, prefetched = null;
+let mode = 'verbs';
 
-        const $ = id => document.getElementById(id);
-        const loading = $('loading');
-        const questionArea = $('questionArea');
-        const sentence = $('sentence');
-        const options = $('options');
-        const feedback = $('feedback');
-        const feedbackText = $('feedbackText');
-        const btnNext = $('btnNext');
-        const scoreEl = $('score');
-        const vocabGroup = $('vocabGroup');
-        const grammarGroup = $('grammarGroup');
+const $ = id => document.getElementById(id);
+const welcomePage = $('welcomePage');
+const appPage = $('appPage');
+const btnStart = $('btnStart');
+const btnBack = $('btnBack');
+const loading = $('loading');
+const questionArea = $('questionArea');
+const sentence = $('sentence');
+const options = $('options');
+const feedback = $('feedback');
+const feedbackText = $('feedbackText');
+const btnNext = $('btnNext');
+const scoreEl = $('score');
+const vocabGroup = $('vocabGroup');
 
-        async function generateQuestion() {
-            const list = WORDS[mode];
-            const word = list[Math.floor(Math.random() * list.length)];
-            const prompt = CONFIG.getPrompt(word);
+// View switching
+function showApp() {
+    welcomePage.classList.remove('active');
+    appPage.classList.add('active');
+    loadQuestion();
+}
 
-            const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${CONFIG.apiKey}`
-                },
-                body: JSON.stringify({
-                    model: CONFIG.model,
-                    messages: [{ role: 'user', content: prompt }],
-                    temperature: CONFIG.temperature,
-                    max_tokens: CONFIG.maxTokens,
-                    response_format: { type: 'json_object' }
-                })
-            });
+function showWelcome() {
+    appPage.classList.remove('active');
+    welcomePage.classList.add('active');
+}
 
-            if (!res.ok) throw new Error(`API error: ${res.status}`);
+btnStart.onclick = showApp;
+btnBack.onclick = showWelcome;
 
-            const data = await res.json();
-            const text = data.choices[0].message.content;
+async function generateQuestion() {
+    const list = WORDS[mode];
+    const word = list[Math.floor(Math.random() * list.length)];
+    const prompt = CONFIG.getPrompt(word);
 
-            try {
-                return JSON.parse(text);
-            } catch {
-                return JSON.parse(text.replace(/[\x00-\x1F\x7F]/g, ' '));
-            }
-        }
+    const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${CONFIG.apiKey}`
+        },
+        body: JSON.stringify({
+            model: CONFIG.model,
+            messages: [{ role: 'user', content: prompt }],
+            temperature: CONFIG.temperature,
+            max_tokens: CONFIG.maxTokens,
+            response_format: { type: 'json_object' }
+        })
+    });
 
-        async function loadQuestion() {
-            showLoading(true);
-            try {
-                currentQuestion = prefetched || await generateQuestion();
-                prefetched = null;
-                displayQuestion();
-                showLoading(false);
-                generateQuestion().then(q => { prefetched = q; }).catch(() => {});
-            } catch (err) {
-                console.error(err);
-                sentence.textContent = 'Failed to load. Refresh to try again.';
-                showLoading(false);
-            }
-        }
+    if (!res.ok) throw new Error(`API error: ${res.status}`);
 
-        function displayQuestion() {
-            sentence.innerHTML = currentQuestion.sentence.replace(/_____/g, '<span class="blank">_____</span>');
+    const data = await res.json();
+    const text = data.choices[0].message.content;
 
-            // Shuffle options while tracking the correct answer's new position
-            const originalCorrectIndex = currentQuestion.correctIndex;
-            const indexed = currentQuestion.options.map((opt, i) => ({ opt, origIndex: i, explanation: currentQuestion.explanations?.[i] }));
-            for (let i = indexed.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
-            }
+    try {
+        return JSON.parse(text);
+    } catch {
+        return JSON.parse(text.replace(/[\x00-\x1F\x7F]/g, ' '));
+    }
+}
 
-            // Update currentQuestion with shuffled data
-            currentQuestion.options = indexed.map(x => x.opt);
-            currentQuestion.correctIndex = indexed.findIndex(x => x.origIndex === originalCorrectIndex);
-            if (currentQuestion.explanations) {
-                currentQuestion.explanations = indexed.map(x => x.explanation);
-            }
+async function loadQuestion() {
+    showLoading(true);
+    try {
+        currentQuestion = prefetched || await generateQuestion();
+        prefetched = null;
+        displayQuestion();
+        showLoading(false);
+        generateQuestion().then(q => { prefetched = q; }).catch(() => {});
+    } catch (err) {
+        console.error(err);
+        sentence.textContent = 'Failed to load. Refresh to try again.';
+        showLoading(false);
+    }
+}
 
-            const keys = ['A', 'B', 'C', 'D', 'E'];
-            options.innerHTML = currentQuestion.options.map((opt, i) => `
-                <button class="option" data-index="${i}">
-                    <span class="key">${keys[i]}</span>
-                    <span>${opt}</span>
-                </button>
-            `).join('');
+function displayQuestion() {
+    sentence.innerHTML = currentQuestion.sentence.replace(/_____/g, '<span class="blank">_____</span>');
 
-            options.querySelectorAll('.option').forEach(btn => {
-                btn.onclick = () => selectAnswer(+btn.dataset.index);
-            });
+    const originalCorrectIndex = currentQuestion.correctIndex;
+    const indexed = currentQuestion.options.map((opt, i) => ({ opt, origIndex: i, explanation: currentQuestion.explanations?.[i] }));
+    for (let i = indexed.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+    }
 
-            feedback.classList.add('hidden');
-            btnNext.classList.add('hidden');
-        }
+    currentQuestion.options = indexed.map(x => x.opt);
+    currentQuestion.correctIndex = indexed.findIndex(x => x.origIndex === originalCorrectIndex);
+    if (currentQuestion.explanations) {
+        currentQuestion.explanations = indexed.map(x => x.explanation);
+    }
 
-        function selectAnswer(index) {
-            const isCorrect = index === currentQuestion.correctIndex;
-            total++;
-            if (isCorrect) correct++;
-            scoreEl.textContent = `${correct} / ${total}`;
+    const keys = ['A', 'B', 'C', 'D', 'E'];
+    options.innerHTML = currentQuestion.options.map((opt, i) => `
+        <button class="option" data-index="${i}">
+            <span class="key">${keys[i]}</span>
+            <span>${opt}</span>
+        </button>
+    `).join('');
 
-            options.querySelectorAll('.option').forEach((btn, i) => {
-                btn.disabled = true;
-                if (i === index) btn.classList.add(isCorrect ? 'correct' : 'incorrect');
-                if (i === currentQuestion.correctIndex && !isCorrect) btn.classList.add('revealed');
-            });
+    options.querySelectorAll('.option').forEach(btn => {
+        btn.onclick = () => selectAnswer(+btn.dataset.index);
+    });
 
-            // Build detailed feedback with all explanations
-            const keys = ['A', 'B', 'C', 'D', 'E'];
-            let feedbackHTML = '';
-            
-            // Use new explanations array if available, fallback to single explanation
-            if (currentQuestion.explanations && currentQuestion.explanations.length === 5) {
-                feedbackHTML = '<div class="explanation-list">';
-                currentQuestion.options.forEach((opt, i) => {
-                    const isOptCorrect = i === currentQuestion.correctIndex;
-                    const explanation = currentQuestion.explanations[i] || '';
-                    feedbackHTML += `
-                        <div class="explanation-item ${isOptCorrect ? 'correct' : 'wrong'}">
-                            <span class="opt-label">${keys[i]}</span>
-                            <span class="opt-text"><strong>${opt}:</strong> ${explanation}</span>
-                        </div>
-                    `;
-                });
-                feedbackHTML += '</div>';
-            } else {
-                // Fallback to single explanation
-                feedbackHTML = `<p>${currentQuestion.explanation}</p>`;
-            }
-            
-            feedbackText.innerHTML = feedbackHTML;
-            feedback.classList.remove('hidden');
-            btnNext.classList.remove('hidden');
-        }
+    feedback.classList.add('hidden');
+    btnNext.classList.add('hidden');
+}
 
-        function showLoading(show) {
-            loading.classList.toggle('hidden', !show);
-            questionArea.classList.toggle('hidden', show);
-        }
+function selectAnswer(index) {
+    const isCorrect = index === currentQuestion.correctIndex;
+    total++;
+    if (isCorrect) correct++;
+    scoreEl.textContent = `${correct} / ${total}`;
 
-        function handleCategoryClick(e) {
-            const btn = e.target.closest('.toggle-btn');
-            if (!btn) return;
+    options.querySelectorAll('.option').forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === index) btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+        if (i === currentQuestion.correctIndex && !isCorrect) btn.classList.add('revealed');
+    });
 
-            const newMode = btn.dataset.mode;
-            if (mode === newMode) return;
-
-            mode = newMode;
-
-            // Clear all active states
-            vocabGroup.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-            grammarGroup.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-
-            btn.classList.add('active');
-            prefetched = null;
-            correct = 0;
-            total = 0;
-            scoreEl.textContent = '0 / 0';
-            loadQuestion();
-        }
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', e => {
-            if (!loading.classList.contains('hidden')) return;
-
-            const map = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, 'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4 };
-            const idx = map[e.key.toLowerCase()];
-
-            if (idx !== undefined) {
-                const btn = options.querySelector(`.option[data-index="${idx}"]`);
-                if (btn && !btn.disabled) selectAnswer(idx);
-            }
-
-            if (e.key === 'Enter' && !btnNext.classList.contains('hidden')) loadQuestion();
+    const keys = ['A', 'B', 'C', 'D', 'E'];
+    let feedbackHTML = '';
+    
+    if (currentQuestion.explanations && currentQuestion.explanations.length === 5) {
+        feedbackHTML = '<div class="explanation-list">';
+        currentQuestion.options.forEach((opt, i) => {
+            const isOptCorrect = i === currentQuestion.correctIndex;
+            const explanation = currentQuestion.explanations[i] || '';
+            feedbackHTML += `
+                <div class="explanation-item ${isOptCorrect ? 'correct' : 'wrong'}">
+                    <span class="opt-label">${keys[i]}</span>
+                    <span class="opt-text"><strong>${opt}:</strong> ${explanation}</span>
+                </div>
+            `;
         });
+        feedbackHTML += '</div>';
+    } else {
+        feedbackHTML = `<p>${currentQuestion.explanation}</p>`;
+    }
+    
+    feedbackText.innerHTML = feedbackHTML;
+    feedback.classList.remove('hidden');
+    btnNext.classList.remove('hidden');
+}
 
-        btnNext.onclick = loadQuestion;
-        vocabGroup.onclick = handleCategoryClick;
-        grammarGroup.onclick = handleCategoryClick;
+function showLoading(show) {
+    loading.classList.toggle('hidden', !show);
+    questionArea.classList.toggle('hidden', show);
+}
 
-        loadQuestion();
+function handleCategoryClick(e) {
+    const btn = e.target.closest('.toggle-btn');
+    if (!btn) return;
+
+    const newMode = btn.dataset.mode;
+    if (mode === newMode) return;
+
+    mode = newMode;
+    vocabGroup.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    prefetched = null;
+    correct = 0;
+    total = 0;
+    scoreEl.textContent = '0 / 0';
+    loadQuestion();
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+    if (!appPage.classList.contains('active')) return;
+    if (!loading.classList.contains('hidden')) return;
+
+    const map = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, 'a': 0, 'b': 1, 'c': 2, 'd': 3, 'e': 4 };
+    const idx = map[e.key.toLowerCase()];
+
+    if (idx !== undefined) {
+        const btn = options.querySelector(`.option[data-index="${idx}"]`);
+        if (btn && !btn.disabled) selectAnswer(idx);
+    }
+
+    if (e.key === 'Enter' && !btnNext.classList.contains('hidden')) loadQuestion();
+});
+
+btnNext.onclick = loadQuestion;
+vocabGroup.onclick = handleCategoryClick;
     </script>
 </body>
 </html>

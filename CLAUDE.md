@@ -5,15 +5,16 @@ A minimal web app for practicing academic English using AI-generated fill-in-the
 ## Quick Start
 
 1. Double-click `index.html` to open in browser
-2. Select a category (Verbs, Nouns, Modals, etc.)
-3. Answer questions
-4. Keyboard: **1-5** or **A-E** to answer, **Enter** for next
+2. Click "Start Learning" on the welcome page
+3. Select a vocabulary category (Verbs, Nouns, etc.)
+4. Answer questions
+5. Keyboard: **1-5** or **A-E** to answer, **Enter** for next
 
 ## File Structure
 
 ```
 /
-├── index.html   ← App code & UI (don't edit unless changing API)
+├── index.html   ← App with integrated welcome page
 ├── words.js     ← Word lists (edit this to customize vocabulary)
 └── CLAUDE.md    ← This documentation
 ```
@@ -72,9 +73,7 @@ const CONFIG = {
 };
 ```
 
-## Categories (16 total, 320 items)
-
-### Vocabulary (7 categories)
+## Categories (7 vocabulary categories)
 
 | Category | Examples |
 |----------|----------|
@@ -85,20 +84,6 @@ const CONFIG = {
 | Prepositions | according to, due to, in terms of |
 | Phrasal Verbs | account for, carry out, deal with |
 | Connectors | although, however, therefore, whereas |
-
-### Grammar (9 categories)
-
-| Category | Examples |
-|----------|----------|
-| Relative Clauses | who, which, in which, whose |
-| Noun Clauses | that, what, whether, whoever |
-| Tenses | had been, will have, should have |
-| If Clauses | unless, provided that, as long as |
-| Modals | can, could, ought to, had better |
-| Passive Voice | is done, has been done, is said to be |
-| Quantifiers | a few, a little, plenty of, neither |
-| Pronouns | myself, each other, everyone, whoever |
-| Gerund/Inf/Caus | doing, to do, have something done |
 
 ## Keyboard Shortcuts
 
