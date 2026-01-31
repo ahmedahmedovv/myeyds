@@ -1030,7 +1030,6 @@
 // ═══════════════════════════════════════════════════════════════
 
 const CONFIG = {
-    apiKey: 'UyFZtjZY3r5aNe1th2qtx6IBLynCc0ai',
     model: 'mistral-small-latest',
     temperature: 0.8,
     maxTokens: 1024,
@@ -1112,18 +1111,17 @@ async function generateQuestion() {
     const word = MYWORDS[Math.floor(Math.random() * MYWORDS.length)];
     const prompt = CONFIG.getPrompt(word);
 
-    const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
+    // Call Netlify Edge Function instead of Mistral API directly
+    const res = await fetch('/api/question', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${CONFIG.apiKey}`
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            prompt: prompt,
             model: CONFIG.model,
-            messages: [{ role: 'user', content: prompt }],
             temperature: CONFIG.temperature,
-            max_tokens: CONFIG.maxTokens,
-            response_format: { type: 'json_object' }
+            maxTokens: CONFIG.maxTokens
         })
     });
 
