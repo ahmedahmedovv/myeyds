@@ -14,12 +14,8 @@
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
-        /* Prevent horizontal scroll on all devices */
         body {
             overflow-x: hidden;
-        }
-
-        body {
             font-family: 'Crimson Pro', Georgia, serif;
             font-size: 1rem;
             line-height: 1.6;
@@ -32,7 +28,7 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           WELCOME PAGE STYLES
+           SIMPLE WELCOME PAGE
            ═══════════════════════════════════════════════════════════════ */
 
         .welcome-container {
@@ -46,123 +42,28 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, #fdfbf7 0%, #f5f0e8 100%);
         }
 
         .welcome-container.active {
             display: flex;
         }
 
-        .welcome-logo {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .welcome-icon {
+            font-size: 3rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px rgba(30, 41, 59, 0.15);
-        }
-
-        .welcome-logo svg {
-            width: 40px;
-            height: 40px;
-            fill: #fdfbf7;
         }
 
         .welcome-title {
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: #1e293b;
         }
 
-        .welcome-subtitle {
-            font-size: 1rem;
+        .welcome-tagline {
+            font-size: 1.1rem;
             color: #64748b;
-            margin-bottom: 2rem;
-            font-weight: 400;
-        }
-
-        .welcome-description {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            margin-bottom: 2rem;
-            text-align: left;
-            border: 1px solid #e2e8f0;
-            max-width: 100%;
-        }
-
-        .welcome-description p {
-            color: #475569;
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .welcome-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-            width: 100%;
-        }
-
-        .welcome-feature {
-            background: white;
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-        }
-
-        .welcome-feature-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-feature-title {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.25rem;
-        }
-
-        .welcome-feature-desc {
-            font-size: 0.7rem;
-            color: #64748b;
-        }
-
-        .welcome-categories {
-            margin-bottom: 2rem;
-            width: 100%;
-        }
-
-        .welcome-categories-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #94a3b8;
-            margin-bottom: 0.75rem;
-            font-weight: 500;
-        }
-
-        .welcome-category-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .welcome-tag {
-            background: white;
-            border: 1px solid #e2e8f0;
-            padding: 0.4rem 0.8rem;
-            border-radius: 16px;
-            font-size: 0.8rem;
-            color: #64748b;
+            margin-bottom: 2.5rem;
         }
 
         .btn-start {
@@ -179,17 +80,12 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
+            margin-bottom: 1rem;
         }
 
         .btn-start:hover {
             background: #334155;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(30, 41, 59, 0.25);
         }
 
         .btn-start:active {
@@ -197,15 +93,8 @@
             background: #475569;
         }
 
-        .btn-start svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        .welcome-footer {
-            margin-top: 2rem;
-            font-size: 0.75rem;
+        .welcome-note {
+            font-size: 0.85rem;
             color: #94a3b8;
         }
 
@@ -253,71 +142,6 @@
             border-radius: 6px;
         }
 
-        /* Category Tabs */
-        .category-section {
-            margin-bottom: 0.6rem;
-        }
-
-        .category-label {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
-            margin-bottom: 0.4rem;
-            font-weight: 500;
-        }
-
-        .category-scroll {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            margin: 0 -0.75rem;
-            padding: 0 0.75rem;
-        }
-
-        .category-scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        .toggle-group {
-            display: flex;
-            gap: 0.35rem;
-            padding-bottom: 0.4rem;
-            min-width: max-content;
-        }
-
-        .toggle-btn {
-            min-height: 36px;
-            padding: 0.5rem 0.65rem;
-            font-family: inherit;
-            font-size: 0.7rem;
-            border: 1px solid #e2e8f0;
-            background: white;
-            border-radius: 18px;
-            cursor: pointer;
-            color: #64748b;
-            transition: all 0.15s ease;
-            white-space: nowrap;
-            touch-action: manipulation;
-        }
-
-        .toggle-btn:hover {
-            border-color: #94a3b8;
-            background: #f8fafc;
-        }
-
-        .toggle-btn:active {
-            background: #f1f5f9;
-            transform: scale(0.97);
-        }
-
-        .toggle-btn.active {
-            background: #1e293b;
-            color: white;
-            border-color: #1e293b;
-        }
-
         /* Loading */
         .loading {
             text-align: center;
@@ -349,31 +173,6 @@
         }
 
         .question-area.hidden { display: none; }
-
-        @media (max-height: 700px) {
-            .question-area {
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .sentence {
-                flex-shrink: 0;
-            }
-            
-            .options {
-                flex: 1;
-            }
-            
-            .feedback {
-                flex-shrink: 0;
-                max-height: 30vh;
-                overflow-y: auto;
-            }
-            
-            .btn-next {
-                flex-shrink: 0;
-            }
-        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
@@ -592,398 +391,52 @@
             fill: currentColor;
         }
 
-        /* iPhone 13 mini and small phones (390px and below) */
+        /* Mobile */
         @media (max-width: 390px) {
             .welcome-container {
-                padding: 0.75rem 1rem;
-                padding-top: max(0.75rem, env(safe-area-inset-top));
-                justify-content: flex-start;
-                padding-bottom: 1rem;
+                padding: 1.5rem 1rem;
             }
 
-            .welcome-logo {
-                width: 48px;
-                height: 48px;
-                border-radius: 12px;
-                margin-bottom: 0.5rem;
-                margin-top: 0.5rem;
-            }
-
-            .welcome-logo svg {
-                width: 24px;
-                height: 24px;
-            }
-
-            .welcome-title {
-                font-size: 1.25rem;
-                margin-bottom: 0.25rem;
-            }
-
-            .welcome-subtitle {
-                font-size: 0.85rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .welcome-features {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.5rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .welcome-feature {
-                padding: 0.5rem;
-            }
-
-            .welcome-feature-icon {
-                font-size: 1.1rem;
-                margin-bottom: 0.25rem;
-            }
-
-            .welcome-feature-title {
-                font-size: 0.65rem;
-            }
-
-            .welcome-feature-desc {
-                font-size: 0.6rem;
-            }
-
-            .welcome-description {
-                padding: 0.75rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .welcome-description p {
-                font-size: 0.8rem;
-                line-height: 1.5;
-            }
-
-            .btn-start {
-                min-height: 44px;
-                padding: 0.6rem 1.25rem;
-                font-size: 0.9rem;
-            }
-
-            .welcome-footer {
-                margin-top: 1rem;
-                font-size: 0.7rem;
-            }
-
-            /* App - Compact layout */
-            .app {
-                padding: 0.5rem;
-                padding-top: max(0.25rem, env(safe-area-inset-top));
-                padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-                min-height: -webkit-fill-available;
-            }
-
-            .header {
-                margin-bottom: 0.5rem;
-                flex-shrink: 0;
-            }
-
-            .header-top {
-                padding-bottom: 0.35rem;
-                margin-bottom: 0.35rem;
-            }
-
-            .header h1 {
-                font-size: 0.85rem;
-            }
-
-            .score {
-                font-size: 0.7rem;
-                padding: 0.2rem 0.4rem;
-            }
-
-            /* Question area fills available space */
-            .question-area {
-                display: flex;
-                flex-direction: column;
-                flex: 1;
-                min-height: 0;
-            }
-
-            .sentence {
-                font-size: 0.9rem;
-                line-height: 1.5;
-                padding: 0.6rem 0.75rem;
-                margin-bottom: 0.5rem;
-                flex-shrink: 0;
-            }
-
-            .options {
-                gap: 0.35rem;
-                margin-bottom: 0.5rem;
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-            }
-
-            .option {
-                min-height: 42px;
-                font-size: 0.85rem;
-                padding: 0.4rem 0.6rem;
-                gap: 0.4rem;
-            }
-
-            .option .key {
-                width: 20px;
-                height: 20px;
-                font-size: 0.65rem;
-            }
-
-            .feedback {
-                padding: 0.6rem;
-                margin-bottom: 0.5rem;
-                flex-shrink: 0;
-                max-height: 35vh;
-                overflow-y: auto;
-            }
-
-            .feedback p {
-                font-size: 0.8rem;
-            }
-
-            .explanation-list {
-                margin-top: 0.5rem;
-                padding-top: 0.5rem;
-            }
-
-            .explanation-item {
-                font-size: 0.75rem;
-                margin-bottom: 0.35rem;
-            }
-
-            .btn-next {
-                min-height: 44px;
-                padding: 0.6rem;
-                font-size: 0.9rem;
-                flex-shrink: 0;
-                margin-top: auto;
-            }
-
-            .btn-back {
-                font-size: 0.75rem;
-                margin-bottom: 0.25rem;
-                flex-shrink: 0;
-            }
-
-            .loading {
-                padding: 1rem 0;
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-        }
-
-        /* Large phones (391px - 639px) - iPhone 14/15 Pro, Max, Plus */
-        @media (min-width: 391px) and (max-width: 639px) {
-            .welcome-container {
-                padding: 1.5rem;
+            .welcome-icon {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
             }
 
             .welcome-title {
                 font-size: 1.6rem;
             }
 
-            .welcome-features {
-                grid-template-columns: repeat(2, 1fr);
+            .welcome-tagline {
+                font-size: 1rem;
+                margin-bottom: 2rem;
             }
 
             .app {
-                padding: 0.75rem;
-            }
-        }
-
-        /* Tablet & Desktop (640px and up) */
-        @media (min-width: 640px) {
-            .welcome-container {
-                padding: 3rem 2rem;
-                max-width: 680px;
-            }
-
-            .welcome-logo {
-                width: 100px;
-                height: 100px;
-                border-radius: 24px;
-            }
-
-            .welcome-logo svg {
-                width: 48px;
-                height: 48px;
-            }
-
-            .welcome-title {
-                font-size: 2.5rem;
-            }
-
-            .welcome-subtitle {
-                font-size: 1.15rem;
-            }
-
-            .welcome-description {
-                padding: 2rem;
-                max-width: 560px;
-            }
-
-            .welcome-description p {
-                font-size: 1.1rem;
-            }
-
-            .welcome-features {
-                grid-template-columns: repeat(4, 1fr);
-                max-width: 560px;
-            }
-
-            .btn-start {
-                font-size: 1.1rem;
-                min-height: 56px;
-                max-width: 320px;
-            }
-
-            .app {
-                max-width: 720px;
-                padding: 2rem 1.5rem;
-            }
-
-            .header {
-                margin-bottom: 1.5rem;
-            }
-
-            .header-top {
-                padding-bottom: 1rem;
-            }
-
-            .header h1 {
-                font-size: 1.35rem;
-            }
-
-            .score {
-                font-size: 0.95rem;
+                padding: 0.5rem;
             }
 
             .sentence {
-                font-size: 1.35rem;
-                padding: 2rem;
-                margin-bottom: 1.5rem;
-                line-height: 1.8;
-            }
-
-            .options {
-                gap: 0.75rem;
-                margin-bottom: 1.5rem;
+                font-size: 0.95rem;
+                padding: 0.75rem;
             }
 
             .option {
-                padding: 1.1rem 1.5rem;
-                font-size: 1.1rem;
-                min-height: 56px;
-            }
-
-            .option .key {
-                width: 28px;
-                height: 28px;
-                font-size: 0.8rem;
-            }
-
-            .feedback {
-                padding: 1.25rem;
-                margin-bottom: 1.25rem;
-            }
-
-            .feedback p {
-                font-size: 1rem;
-            }
-
-            .explanation-item {
-                font-size: 0.95rem;
-            }
-
-            .btn-next {
-                padding: 1.1rem;
-                font-size: 1.05rem;
-                min-height: 56px;
-            }
-
-            .btn-back {
                 font-size: 0.9rem;
-            }
-        }
-
-        /* Large Desktop (1024px and up) */
-        @media (min-width: 1024px) {
-            .welcome-container {
-                max-width: 800px;
-            }
-
-            .app {
-                max-width: 900px;
-                padding: 3rem 2rem;
-            }
-
-            .sentence {
-                font-size: 1.5rem;
+                min-height: 44px;
             }
         }
     </style>
 </head>
 <body>
     <!-- ═══════════════════════════════════════════════════════════════
-         WELCOME PAGE
+         SIMPLE WELCOME PAGE
          ═══════════════════════════════════════════════════════════════ -->
     <div class="welcome-container active" id="welcomePage">
-        <div class="welcome-logo">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-                <path d="M8 12h8v2H8zm0 4h8v2H8zm0-8h3v2H8z"/>
-            </svg>
-        </div>
-
+        <div class="welcome-icon">📚</div>
         <h1 class="welcome-title">Academic English</h1>
-        <p class="welcome-subtitle">Master academic vocabulary with AI-powered practice</p>
-
-        <div class="welcome-description">
-            <p>Improve your academic writing and reading skills through interactive fill-in-the-blank exercises. Practice with a curated list of academic vocabulary words, phrasal verbs, and expressions. Our AI generates contextual questions to help you understand how words are used in real academic settings.</p>
-        </div>
-
-        <div class="welcome-features">
-            <div class="welcome-feature">
-                <div class="welcome-feature-icon">📚</div>
-                <div class="welcome-feature-title">Vocabulary</div>
-                <div class="welcome-feature-desc">Words, phrases & expressions</div>
-            </div>
-            <div class="welcome-feature">
-                <div class="welcome-feature-icon">🎯</div>
-                <div class="welcome-feature-title">AI-Powered</div>
-                <div class="welcome-feature-desc">Smart contextual questions</div>
-            </div>
-            <div class="welcome-feature">
-                <div class="welcome-feature-icon">⚡</div>
-                <div class="welcome-feature-title">Instant</div>
-                <div class="welcome-feature-desc">Immediate feedback</div>
-            </div>
-            <div class="welcome-feature">
-                <div class="welcome-feature-icon">📱</div>
-                <div class="welcome-feature-title">Mobile</div>
-                <div class="welcome-feature-desc">Practice anywhere</div>
-            </div>
-        </div>
-
-        <button class="btn-start" id="btnStart">
-            Start Learning
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-            </svg>
-        </button>
-
-        <div class="welcome-footer">
-            Press 1-5 or A-E to answer • Enter for next
-        </div>
+        <p class="welcome-tagline">Master academic vocabulary through practice</p>
+        <button class="btn-start" id="btnStart">Start Learning</button>
+        <p class="welcome-note">Press 1-5 or A-E to answer • Enter for next</p>
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════
@@ -1002,8 +455,6 @@
                 <h1>Academic English</h1>
                 <div class="score" id="score">0 / 0</div>
             </div>
-
-
         </header>
 
         <div class="loading hidden" id="loading">
