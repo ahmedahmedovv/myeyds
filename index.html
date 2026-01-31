@@ -716,14 +716,14 @@
         <p class="welcome-subtitle">Master academic vocabulary with AI-powered practice</p>
 
         <div class="welcome-description">
-            <p>Improve your academic writing and reading skills through interactive fill-in-the-blank exercises. Our AI generates contextual questions that help you understand how words are used in real academic settings.</p>
+            <p>Improve your academic writing and reading skills through interactive fill-in-the-blank exercises. Practice with a curated list of academic vocabulary words, phrasal verbs, and expressions. Our AI generates contextual questions to help you understand how words are used in real academic settings.</p>
         </div>
 
         <div class="welcome-features">
             <div class="welcome-feature">
                 <div class="welcome-feature-icon">📚</div>
-                <div class="welcome-feature-title">300+ Words</div>
-                <div class="welcome-feature-desc">Carefully curated vocabulary</div>
+                <div class="welcome-feature-title">Vocabulary</div>
+                <div class="welcome-feature-desc">Words, phrases & expressions</div>
             </div>
             <div class="welcome-feature">
                 <div class="welcome-feature-icon">🎯</div>
@@ -739,19 +739,6 @@
                 <div class="welcome-feature-icon">📱</div>
                 <div class="welcome-feature-title">Mobile</div>
                 <div class="welcome-feature-desc">Practice anywhere</div>
-            </div>
-        </div>
-
-        <div class="welcome-categories">
-            <div class="welcome-categories-label">Practice Categories</div>
-            <div class="welcome-category-tags">
-                <span class="welcome-tag">Verbs</span>
-                <span class="welcome-tag">Nouns</span>
-                <span class="welcome-tag">Adjectives</span>
-                <span class="welcome-tag">Adverbs</span>
-                <span class="welcome-tag">Prepositions</span>
-                <span class="welcome-tag">Phrasal Verbs</span>
-                <span class="welcome-tag">Connectors</span>
             </div>
         </div>
 
@@ -784,20 +771,7 @@
                 <div class="score" id="score">0 / 0</div>
             </div>
 
-            <div class="category-section">
-                <div class="category-label">Vocabulary</div>
-                <div class="category-scroll">
-                    <div class="toggle-group" id="vocabGroup">
-                        <button class="toggle-btn active" data-mode="verbs">Verbs</button>
-                        <button class="toggle-btn" data-mode="nouns">Nouns</button>
-                        <button class="toggle-btn" data-mode="adjectives">Adjectives</button>
-                        <button class="toggle-btn" data-mode="adverbs">Adverbs</button>
-                        <button class="toggle-btn" data-mode="prepositions">Prepositions</button>
-                        <button class="toggle-btn" data-mode="phrasal">Phrasal Verbs</button>
-                        <button class="toggle-btn" data-mode="connectors">Connectors</button>
-                    </div>
-                </div>
-            </div>
+
         </header>
 
         <div class="loading hidden" id="loading">
@@ -815,8 +789,8 @@
         </main>
     </div>
 
-    <!-- Word lists -->
-    <script src="words.js"></script>
+    <!-- Word list -->
+    <script src="mywords.js"></script>
 
     <script>
 // ═══════════════════════════════════════════════════════════════
@@ -871,7 +845,6 @@ Respond with JSON only:
 // ═══════════════════════════════════════════════════════════════
 
 let correct = 0, total = 0, currentQuestion = null, prefetched = null;
-let mode = 'verbs';
 
 const $ = id => document.getElementById(id);
 const welcomePage = $('welcomePage');
@@ -886,7 +859,7 @@ const feedback = $('feedback');
 const feedbackText = $('feedbackText');
 const btnNext = $('btnNext');
 const scoreEl = $('score');
-const vocabGroup = $('vocabGroup');
+
 
 // View switching
 function showApp() {
@@ -904,8 +877,7 @@ btnStart.onclick = showApp;
 btnBack.onclick = showWelcome;
 
 async function generateQuestion() {
-    const list = WORDS[mode];
-    const word = list[Math.floor(Math.random() * list.length)];
+    const word = MYWORDS[Math.floor(Math.random() * MYWORDS.length)];
     const prompt = CONFIG.getPrompt(word);
 
     const res = await fetch('https://api.mistral.ai/v1/chat/completions', {
@@ -1024,23 +996,6 @@ function showLoading(show) {
     questionArea.classList.toggle('hidden', show);
 }
 
-function handleCategoryClick(e) {
-    const btn = e.target.closest('.toggle-btn');
-    if (!btn) return;
-
-    const newMode = btn.dataset.mode;
-    if (mode === newMode) return;
-
-    mode = newMode;
-    vocabGroup.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    prefetched = null;
-    correct = 0;
-    total = 0;
-    scoreEl.textContent = '0 / 0';
-    loadQuestion();
-}
-
 // Keyboard shortcuts
 document.addEventListener('keydown', e => {
     if (!appPage.classList.contains('active')) return;
@@ -1058,7 +1013,6 @@ document.addEventListener('keydown', e => {
 });
 
 btnNext.onclick = loadQuestion;
-vocabGroup.onclick = handleCategoryClick;
     </script>
 </body>
 </html>
