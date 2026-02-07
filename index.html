@@ -782,6 +782,13 @@ The correct answer MUST be: "${sanitizedWord}"
 
 ${typeHint}
 
+CRITICAL: Vary the sentence context based on the word's meaning. Do NOT default to "research study" contexts. Choose contexts that match the word's natural usage:
+- For nature/environment words: use environmental, seasonal, or ecological contexts
+- For business/economic words: use corporate, financial, or market contexts  
+- For social/emotional words: use interpersonal, psychological, or societal contexts
+- For technical words: use technological, scientific, or mechanical contexts
+- For abstract/conceptual words: use philosophical, theoretical, or analytical contexts
+
 Requirements:
 - Write a sentence (25-40 words) with rich context where "${sanitizedWord}" is the ONLY natural fit in the blank _____
 - Include specific details (setting, subject matter, relationships between ideas) to make the correct choice unambiguous
@@ -791,17 +798,27 @@ Requirements:
 - Other 4 options should be plausible distractors that would NOT fit naturally given the specific context
 - For EACH option, explain why it is correct or wrong based on the specific context clues in the sentence
 
+EXAMPLES of diverse contexts (for illustration only - create appropriate context for "${sanitizedWord}"):
+
+Example 1 (Nature context for "blossom"): The once-barren hillsides began to _____ with wildflowers after the spring rains returned, transforming the arid landscape into a vibrant tapestry of purple and yellow blooms.
+
+Example 2 (Business context for "merge"): The two rival pharmaceutical companies decided to _____ their operations after months of negotiation, creating the largest healthcare conglomerate in European history.
+
+Example 3 (Social context for "alienate"): The politician's harsh rhetoric managed to _____ even his most loyal supporters, who felt betrayed by his sudden shift toward extreme ideological positions.
+
+Example 4 (Technical context for "disrupt"): The innovative startup aimed to _____ the traditional banking sector by offering instant peer-to-peer transactions without intermediaries or excessive processing fees.
+
 Respond with JSON only:
 {
-  "sentence": "In their latest study, the research team decided to _____ the raw survey data from over 500 participants, looking for hidden correlations between income levels and educational attainment that previous analyses might have overlooked.",
-  "options": ["analyze", "memorize", "celebrate", "ignore", "publish"],
+  "sentence": "Your contextually appropriate sentence here with _____ for the blank",
+  "options": ["${sanitizedWord}", "distractor1", "distractor2", "distractor3", "distractor4"],
   "correctIndex": 0,
   "explanations": [
-    "'Analyze' is correct because the context mentions examining raw data for hidden correlations, which requires detailed examination - the definition of analyze.",
-    "'Memorize' is wrong because you don't commit raw survey data to memory; the context is about processing data, not learning it by heart.",
-    "'Celebrate' is wrong because the sentence describes a research methodology, not a celebration of results.",
-    "'Ignore' is wrong because the researchers are actively looking for patterns, which is the opposite of ignoring the data.",
-    "'Publish' is wrong because publishing comes AFTER analysis; the sentence describes what they do WITH the data, not what they do AFTER processing it."
+    "'${sanitizedWord}' is correct because [explain specific context clues].",
+    "'Distractor1' is wrong because [explain why it doesn't fit the specific context].",
+    "'Distractor2' is wrong because [explain why it doesn't fit the specific context].",
+    "'Distractor3' is wrong because [explain why it doesn't fit the specific context].",
+    "'Distractor4' is wrong because [explain why it doesn't fit the specific context]."
   ]
 }`;
     }
